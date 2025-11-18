@@ -9,22 +9,23 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@lemoncash/mini-app-sdk": "^0.1.9",
     "@mint-up/ui": "workspace:*",
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "@tailwindcss/postcss": "catalog:",
     "@tanstack/react-query": "catalog:",
     "next": "16.0.3",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
+    "tailwindcss": "catalog:",
     "viem": "^2.31.6",
     "wagmi": "^2.16.3",
-    "@t3-oss/env-nextjs": "^0.13.8",
-    "zod": "catalog:",
-    "tailwindcss": "catalog:",
-    "@tailwindcss/postcss": "catalog:"
+    "zod": "catalog:"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@mint-up/eslint-config": "workspace:*",
     "@mint-up/tsconfig": "workspace:*",
-    "@eslint/eslintrc": "^3.3.1",
     "@types/node": "catalog:",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
