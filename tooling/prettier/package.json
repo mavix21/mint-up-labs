@@ -1,5 +1,5 @@
 {
-  "name": "@myapp/prettier-config",
+  "name": "@mint-up/prettier-config",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -17,9 +17,9 @@
     "prettier-plugin-tailwindcss": "catalog:"
   },
   "devDependencies": {
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

@@ -15,9 +15,9 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@myapp/convex": "workspace:*",
-    "@myapp/db": "workspace:*",
-    "@myapp/ui": "workspace:*",
+    "@mint-up/convex": "workspace:*",
+    "@mint-up/db": "workspace:*",
+    "@mint-up/ui": "workspace:*",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@tabler/icons-react": "^3.35.0",
     "@tanstack/react-query": "catalog:",
@@ -33,8 +33,8 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@myapp/eslint-config": "workspace:*",
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
@@ -43,5 +43,5 @@
     "jiti": "^2.6.1",
     "typescript": "catalog:"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

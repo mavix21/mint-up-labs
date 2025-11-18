@@ -11,10 +11,10 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@myapp/ui/components",
-    "utils": "@myapp/ui/lib/utils",
-    "hooks": "@myapp/ui/hooks",
-    "lib": "@myapp/ui/lib",
-    "ui": "@myapp/ui/components"
+    "components": "@mint-up/ui/components",
+    "utils": "@mint-up/ui/lib/utils",
+    "hooks": "@mint-up/ui/hooks",
+    "lib": "@mint-up/ui/lib",
+    "ui": "@mint-up/ui/components"
   }
 }

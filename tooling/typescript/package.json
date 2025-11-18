@@ -1,5 +1,5 @@
 {
-  "name": "@myapp/tsconfig",
+  "name": "@mint-up/tsconfig",
   "private": true,
   "files": [
     "*.json"

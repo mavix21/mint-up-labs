@@ -1,1 +1,1 @@
-export { default } from "@myapp/tailwind-config/postcss-config";
+export { default } from "@mint-up/tailwind-config/postcss-config";

@@ -7,7 +7,7 @@
       "outputs": [".next/**", "!.next/cache/**", "next-env.d.ts"]
     },
     "dev": {
-      "with": ["@myapp/convex#dev"],
+      "with": ["@mint-up/convex#dev"],
       "persistent": true,
       "cache": false
     }

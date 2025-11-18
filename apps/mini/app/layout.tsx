@@ -5,7 +5,7 @@ import { minikitConfig } from "@/minikit.config";
 
 import { RootProvider } from "./rootProvider";
 
-import "@myapp/ui/globals.css";
+import "@mint-up/ui/globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

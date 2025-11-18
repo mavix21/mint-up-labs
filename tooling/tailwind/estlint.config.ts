@@ -1,5 +1,5 @@
 import { defineConfig } from "eslint/config";
 
-import { baseConfig } from "@myapp/eslint-config/base";
+import { baseConfig } from "@mint-up/eslint-config/base";
 
 export default defineConfig(baseConfig);

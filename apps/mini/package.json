@@ -16,7 +16,7 @@
   "dependencies": {
     "@coinbase/onchainkit": "1.1.2",
     "@farcaster/miniapp-sdk": "^0.1.10",
-    "@myapp/ui": "workspace:*",
+    "@mint-up/ui": "workspace:*",
     "@tanstack/react-query": "catalog:",
     "next": "16.0.3",
     "react": "catalog:react19",
@@ -29,8 +29,8 @@
     "@tailwindcss/postcss": "catalog:"
   },
   "devDependencies": {
-    "@myapp/eslint-config": "workspace:*",
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "@eslint/eslintrc": "^3.3.1",
     "@types/node": "catalog:",
     "@types/react": "catalog:react19",
@@ -40,5 +40,5 @@
     "jiti": "^2.6.1",
     "typescript": "catalog:"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }
