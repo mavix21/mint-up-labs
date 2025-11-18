@@ -1,0 +1,44 @@
+{
+  "name": "mini",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm with-env next dev",
+    "build": "pnpm with-env next build",
+    "start": "next start",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "clean": "git clean -xdf .cache .next .turbo node_modules",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@coinbase/onchainkit": "1.1.2",
+    "@farcaster/miniapp-sdk": "^0.1.10",
+    "@myapp/ui": "workspace:*",
+    "@tanstack/react-query": "catalog:",
+    "next": "16.0.3",
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19",
+    "viem": "^2.31.6",
+    "wagmi": "^2.16.3",
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "zod": "catalog:",
+    "tailwindcss": "catalog:",
+    "@tailwindcss/postcss": "catalog:"
+  },
+  "devDependencies": {
+    "@myapp/eslint-config": "workspace:*",
+    "@myapp/tsconfig": "workspace:*",
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react19",
+    "@types/react-dom": "catalog:react19",
+    "dotenv-cli": "catalog:",
+    "eslint": "catalog:",
+    "jiti": "^2.6.1",
+    "typescript": "catalog:"
+  },
+  "prettier": "@myapp/prettier-config"
+}

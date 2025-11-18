@@ -1,0 +1,47 @@
+{
+  "name": "web",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm with-env next dev",
+    "build": "pnpm with-env next build",
+    "start": "next start",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "clean": "git clean -xdf .cache .next .turbo node_modules",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@myapp/convex": "workspace:*",
+    "@myapp/db": "workspace:*",
+    "@myapp/ui": "workspace:*",
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "@tabler/icons-react": "^3.35.0",
+    "@tanstack/react-query": "catalog:",
+    "next": "16.0.3",
+    "next-intl": "^4.5.3",
+    "next-themes": "catalog:",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "tailwindcss": "catalog:",
+    "@tailwindcss/postcss": "catalog:",
+    "viem": "^2.31.6",
+    "wagmi": "^2.16.3",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@myapp/eslint-config": "workspace:*",
+    "@myapp/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react19",
+    "@types/react-dom": "catalog:react19",
+    "dotenv-cli": "catalog:",
+    "eslint": "catalog:",
+    "jiti": "^2.6.1",
+    "typescript": "catalog:"
+  },
+  "prettier": "@myapp/prettier-config"
+}
