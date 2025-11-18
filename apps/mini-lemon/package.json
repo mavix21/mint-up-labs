@@ -1,0 +1,37 @@
+{
+  "name": "mini-lemon",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@mint-up/ui": "workspace:*",
+    "@tanstack/react-query": "catalog:",
+    "next": "16.0.3",
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19",
+    "viem": "^2.31.6",
+    "wagmi": "^2.16.3",
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "zod": "catalog:",
+    "tailwindcss": "catalog:",
+    "@tailwindcss/postcss": "catalog:"
+  },
+  "devDependencies": {
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react19",
+    "@types/react-dom": "catalog:react19",
+    "dotenv-cli": "catalog:",
+    "eslint": "catalog:",
+    "jiti": "^2.6.1",
+    "typescript": "catalog:"
+  },
+  "prettier": "@mint-up/prettier-config"
+}
