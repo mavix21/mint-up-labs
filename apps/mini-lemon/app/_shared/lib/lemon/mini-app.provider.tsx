@@ -1,35 +1,13 @@
-import type { Address, Hex } from "viem";
-import * as React from "react";
-import {
-  authenticate,
-  isWebView,
-  TransactionResult,
-} from "@lemoncash/mini-app-sdk";
-import { baseSepolia } from "viem/chains";
+"use client";
 
-type AuthState =
-  | {
-      type: "success";
-      wallet: Address;
-      signature: Hex;
-      message: string;
-    }
-  | {
-      type: "error";
-      error: {
-        message: string;
-        code: string;
-      };
-    }
-  | {
-      type: "canceled";
-    }
-  | {
-      type: "loading";
-    };
+import type { Address } from "viem";
+import * as React from "react";
+import { isWebView } from "@lemoncash/mini-app-sdk";
+
+import { useSignIn } from "./use-sign-in";
 
 interface MiniAppContextType {
-  authResult: AuthState;
+  wallet: Address | null;
 }
 
 const MiniAppContext = React.createContext<MiniAppContextType | undefined>(
@@ -37,53 +15,21 @@ const MiniAppContext = React.createContext<MiniAppContextType | undefined>(
 );
 
 export function MiniAppProvider({ children }: { children: React.ReactNode }) {
-  const [authResult, setAuthResult] = React.useState<AuthState>({
-    type: "loading",
-  });
+  const { signIn, wallet } = useSignIn();
 
   const handleAuthentication = React.useCallback(async () => {
-    setAuthResult({ type: "loading" });
-    const result = await authenticate({ chainId: baseSepolia.id });
-
-    if (result.result === TransactionResult.FAILED) {
-      setAuthResult({
-        type: "error",
-        error: {
-          message: result.error.message,
-          code: result.error.code,
-        },
-      });
-
-      return;
-    }
-
-    if (result.result === TransactionResult.CANCELLED) {
-      setAuthResult({ type: "canceled" });
-
-      return;
-    }
-
-    setAuthResult({
-      type: "success",
-      wallet: result.data.wallet,
-      signature: result.data.signature,
-      message: result.data.message,
-    });
-  }, []);
+    await signIn();
+  }, [signIn]);
 
   React.useEffect(() => {
-    void handleAuthentication();
+    if (isWebView()) {
+      void handleAuthentication();
+    } else {
+      console.warn("Not running inside Lemon app WebView");
+    }
   }, [handleAuthentication]);
 
-  if (!isWebView()) {
-    return (
-      <div>
-        <p>Not running inside Lemon App!</p>
-      </div>
-    );
-  }
-
-  return <MiniAppContext value={{ authResult }}>{children}</MiniAppContext>;
+  return <MiniAppContext value={{ wallet }}>{children}</MiniAppContext>;
 }
 
 export function useMiniApp() {
