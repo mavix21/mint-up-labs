@@ -1,4 +1,5 @@
 import type { AuthOptions } from "next-auth";
+import { createAppClient, viemConnector } from "@farcaster/auth-client";
 import { importPKCS8, SignJWT } from "jose";
 import { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -9,6 +10,7 @@ import { parseSiweMessage } from "viem/siwe";
 import type { Id } from "@mint-up/convex/_generated/dataModel";
 
 import { env } from "./src/env";
+import { getUserByFid } from "./src/features/users/get-user-by-fid";
 import { insertUserByWallet } from "./src/features/users/insert-user-by-wallet.action";
 
 declare module "next-auth" {
@@ -81,9 +83,14 @@ export const authOptions: AuthOptions = {
           type: "text",
           placeholder: "0x0",
         },
+        method: {
+          label: "Method",
+          type: "text",
+          placeholder: "farcaster",
+        },
       },
       async authorize(credentials, req) {
-        const csrfToken = req?.body?.csrfToken;
+        const csrfToken = req.body?.csrfToken as string | undefined;
         if (!csrfToken) {
           console.error("CSRF token is missing from request");
           return null;
@@ -95,13 +102,51 @@ export const authOptions: AuthOptions = {
         }
         const { address } = parseSiweMessage(message);
 
+        if (credentials?.method === "farcaster") {
+          console.log("Using Farcaster authentication method");
+          const appClient = createAppClient({
+            ethereum: viemConnector(),
+          });
+
+          const domain = getDomainFromUrl(env.NEXTAUTH_URL);
+
+          const verifyResponse = await appClient.verifySignInMessage({
+            message,
+            signature: credentials?.signature as `0x${string}`,
+            domain,
+            nonce: csrfToken,
+          });
+          const { success, fid, error } = verifyResponse;
+
+          if (!success) {
+            console.error("Failed to verify sign in message", {
+              error,
+            });
+            return null;
+          }
+
+          const existingUser = await getUserByFid(fid);
+          if (!existingUser) {
+            console.error("No user found for given FID", { fid });
+            return null;
+          }
+
+          return {
+            id: existingUser.userId,
+            image: existingUser.pfpUrl,
+            currentWalletAddress:
+              existingUser.currentWalletAddress as `0x${string}`,
+            username: existingUser.username,
+          };
+        }
+
         const appClient = createPublicClient({
           chain: baseSepolia,
           transport: http(),
         });
 
         if (!address) {
-          console.error("Address is missing from request");
+          console.error("Address is missing from the message");
           return null;
         }
 
@@ -117,52 +162,18 @@ export const authOptions: AuthOptions = {
         }
 
         try {
-          // const existingUser = await getUserByWallet(address);
-
-          // // If user exists, return existing data
-          // if (existingUser) {
-          //   console.warn("User already linked, returning existing data", {
-          //     address,
-          //   });
-          //   return {
-          //     id: existingUser.userId,
-          //     fid,
-          //     name: existingUser.username,
-          //     username: existingUser.username,
-          //     image: existingUser.pfpUrl,
-          //     currentWalletAddress:
-          //       existingUser.currentWalletAddress !== undefined
-          //         ? (existingUser.currentWalletAddress as `0x${string}`)
-          //         : (address ?? "0x0"),
-          //   };
-          // }
-
-          // // Fetch fresh data from Neynar ONLY FOR NEW USERS
-          // const neynarUser = await getNeynarUser(fid);
-          // if (!neynarUser) {
-          //   console.error("Failed to get Neynar user", { fid });
-          // }
-
-          // const userData = {
-          //   username: neynarUser?.username ?? credentials?.name ?? "",
-          //   pfpUrl: neynarUser?.pfp_url ?? credentials?.pfp ?? "",
-          //   bio: neynarUser?.profile.bio.text ?? "",
-          //   displayName: neynarUser?.display_name ?? "",
-          //   currentWalletAddress: address ?? "0x0",
-          // };
-
           // Create user idempotently
           const userId = await insertUserByWallet({
             initializedAt: Date.now(),
             currentWalletAddress: address,
-            username: credentials?.name ?? "",
+            username: credentials?.name ?? "Anon",
             pfpUrl: credentials?.pfp ?? "",
           });
 
           return {
             id: userId,
             image: "",
-            username: credentials?.name ?? "",
+            username: credentials?.name ?? "Anon",
             currentWalletAddress: address,
           };
         } catch (error) {
