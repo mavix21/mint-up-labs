@@ -276,6 +276,9 @@ importers:
       '@auth/core':
         specifier: ^0.34.2
         version: 0.34.3
+      '@farcaster/auth-client':
+        specifier: ^0.7.0
+        version: 0.7.0(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.12)
       '@farcaster/auth-kit':
         specifier: ^0.8.1
         version: 0.8.1(@types/react@19.2.2)(bufferutil@4.0.9)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.12)
