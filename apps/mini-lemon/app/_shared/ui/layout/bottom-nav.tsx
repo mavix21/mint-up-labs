@@ -21,7 +21,7 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className="bg-background/80 border-border/40 pb-safe fixed right-0 bottom-0 left-0 z-50 border-t backdrop-blur-xl">
+    <nav className="border-border/40 pb-safe fixed right-0 bottom-0 left-0 z-50 border-t backdrop-blur-xl dark:bg-[#111]">
       <div className="relative px-2 py-2">
         <div className="flex items-center justify-between">
           {/* Left items */}
@@ -104,7 +104,7 @@ export function BottomNav() {
 
         {/* Centered FAB - positioned at center with negative margin to lift it up */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <CreateEventFab className="shadow-primary/40 ring-background h-14 w-14 shadow-2xl ring-4" />
+          <CreateEventFab className="border-border/40 size-14 border-t shadow-2xl ring-6 dark:ring-[#111]" />
         </div>
       </div>
     </nav>
