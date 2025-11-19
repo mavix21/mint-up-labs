@@ -7,8 +7,6 @@ import {
 } from "@lemoncash/mini-app-sdk";
 import { baseSepolia } from "viem/chains";
 
-import { authClient } from "@/src/lib/auth-client";
-
 type AuthState =
   | {
       type: "success";
@@ -64,11 +62,6 @@ export function MiniAppProvider({ children }: { children: React.ReactNode }) {
 
       return;
     }
-
-    const { data: nonceData, error: nonceError } = await authClient.siwe.nonce({
-      walletAddress: result.data.wallet,
-      chainId: baseSepolia.id,
-    });
 
     setAuthResult({
       type: "success",
