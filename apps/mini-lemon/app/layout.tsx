@@ -6,6 +6,7 @@ import "@farcaster/auth-kit/styles.css";
 
 import { getSession } from "@/auth";
 
+import { MiniAppProvider } from "./_shared/lib/lemon";
 import { AppHeader } from "./_shared/ui/layout/app-header";
 import { BottomNav } from "./_shared/ui/layout/bottom-nav";
 import { ConvexClientProvider } from "./_shared/ui/providers";
@@ -41,16 +42,18 @@ export default async function RootLayout({
       >
         <AuthKitProvider>
           <ConvexClientProvider session={session}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <AppHeader />
-              <div>{children}</div>
-              <BottomNav />
-            </ThemeProvider>
+            <MiniAppProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <AppHeader />
+                <div>{children}</div>
+                <BottomNav />
+              </ThemeProvider>
+            </MiniAppProvider>
           </ConvexClientProvider>
         </AuthKitProvider>
       </body>
