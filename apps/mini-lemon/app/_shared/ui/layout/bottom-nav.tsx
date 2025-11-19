@@ -1,23 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { Calendar, CreditCard, TrendingUp, Users } from "lucide-react";
+import { Calendar, CardSim, Search, Users } from "lucide-react";
 
 import { Button } from "@mint-up/ui/components/button";
 import { cn } from "@mint-up/ui/lib/utils";
 
 import { CreateEventFab } from "./create-event-fab";
 
-type NavItem = "events" | "crypto" | "community" | "wallet";
+type NavItem = "events" | "discover" | "community" | "collection";
 
 export function BottomNav() {
   const [active, setActive] = useState<NavItem>("events");
 
   const navItems = [
-    { id: "events" as const, icon: Calendar, label: "Events" },
-    { id: "crypto" as const, icon: TrendingUp, label: "Crypto" },
-    { id: "community" as const, icon: Users, label: "Community" },
-    { id: "wallet" as const, icon: CreditCard, label: "Wallet" },
+    { id: "events" as const, icon: Calendar, label: "Mis eventos" },
+    { id: "discover" as const, icon: Search, label: "Descubrir" },
+    { id: "community" as const, icon: Users, label: "Comunidades" },
+    { id: "collection" as const, icon: CardSim, label: "Colección" },
   ];
 
   return (
