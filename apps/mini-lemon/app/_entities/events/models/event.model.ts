@@ -6,5 +6,5 @@ export type Event = Doc<"events"> & {
   imageUrl: string | null;
   tickets: Doc<"ticketTemplates">[];
   isHost: boolean;
-  userStatus?: "pending" | "minted" | "rejected" | null;
+  userStatus?: "pending" | "approved" | "minted" | "rejected" | null;
 };
