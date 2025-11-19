@@ -3,7 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "@mint-up/ui/globals.css";
 
+import { AppHeader } from "./_shared/ui/layout/app-header";
+import { BottomNav } from "./_shared/ui/layout/bottom-nav";
 import { ConvexClientProvider } from "./_shared/ui/providers";
+import { AuthKitProvider } from "./_shared/ui/providers/auth-kit-client.provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +33,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ConvexClientProvider session={null}>{children}</ConvexClientProvider>
+        <AuthKitProvider>
+          <ConvexClientProvider session={null}>
+            <AppHeader />
+            <div>{children}</div>
+            <BottomNav />
+          </ConvexClientProvider>
+        </AuthKitProvider>
       </body>
     </html>
   );
