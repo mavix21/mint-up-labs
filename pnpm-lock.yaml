@@ -25,7 +25,7 @@ catalogs:
       specifier: ^9.39.1
       version: 9.39.1
     next-themes:
-      specifier: ^0.4.6
+      specifier: 0.4.6
       version: 0.4.6
     prettier:
       specifier: ^3.6.2
@@ -312,6 +312,9 @@ importers:
       next-auth:
         specifier: ^4.24.11
         version: 4.24.13(@auth/core@0.34.3)(next@16.0.3(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      next-themes:
+        specifier: 'catalog:'
+        version: 0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react:
         specifier: catalog:react19
         version: 19.2.0
