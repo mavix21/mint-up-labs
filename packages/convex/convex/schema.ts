@@ -1,18 +1,18 @@
-import { defineSchema } from 'convex/server';
+import { typedV } from "convex-helpers/validators";
+import { defineSchema } from "convex/server";
 
-import { eventCommunicationsTable } from './tables/eventCommunications';
-import { eventsTable } from './tables/events';
-import { linkedAccountsTable } from './tables/linkedAccounts';
-import { organizationMembersTable } from './tables/organizationMembers';
-import { organizationsTable } from './tables/organizations';
-import { usersTable } from './tables/user';
-import { ticketTemplatesTable } from './tables/ticketTemplates';
-import { registrationsTable } from './tables/registrations';
-import { poapTemplatesTable } from './tables/poapTemplates';
-import { notificationTokensTable } from './tables/notificationTokens';
-import { connectionsTable } from './tables/connections';
-import { typedV } from 'convex-helpers/validators';
-import { authTables } from './tables/authTables';
+import { authTables } from "./tables/authTables";
+import { connectionsTable } from "./tables/connections";
+import { eventCommunicationsTable } from "./tables/eventCommunications";
+import { eventsTable } from "./tables/events";
+import { linkedAccountsTable } from "./tables/linkedAccounts";
+import { notificationTokensTable } from "./tables/notificationTokens";
+import { organizationMembersTable } from "./tables/organizationMembers";
+import { organizationsTable } from "./tables/organizations";
+import { poapTemplatesTable } from "./tables/poapTemplates";
+import { registrationsTable } from "./tables/registrations";
+import { ticketTemplatesTable } from "./tables/ticketTemplates";
+import { usersTable } from "./tables/user";
 
 const schema = defineSchema({
   users: usersTable,

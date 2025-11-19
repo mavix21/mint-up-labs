@@ -1,30 +1,35 @@
-import { omit } from 'convex-helpers';
-import { internalMutation, internalQuery, mutation, query } from './_generated/server';
-import { vv } from './schema';
-import { ConvexError, v } from 'convex/values';
+import { omit } from "convex-helpers";
+import { ConvexError, v } from "convex/values";
 
-import { PROFESSIONAL_PROFILE_ROLES } from './constants/professionalProfile';
-import type { ProfessionalProfileRole } from './constants/professionalProfile';
-import type { Doc } from './_generated/dataModel';
+import type { Doc } from "./_generated/dataModel";
+import type { ProfessionalProfileRole } from "./constants/professionalProfile";
+import {
+  internalMutation,
+  internalQuery,
+  mutation,
+  query,
+} from "./_generated/server";
+import { PROFESSIONAL_PROFILE_ROLES } from "./constants/professionalProfile";
+import { vv } from "./schema";
 
 export const insertUserByFid = mutation({
   args: {
-    ...omit(vv.doc('users').fields, ['_id', '_creationTime']),
+    ...omit(vv.doc("users").fields, ["_id", "_creationTime"]),
     currentWalletAddress: v.optional(v.string()),
     fid: v.number(),
     initializedAt: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const linkedAccount = await ctx.db
-      .query('linkedAccounts')
-      .withIndex('by_farcaster_fid', (q) => q.eq('account.fid', args.fid))
+      .query("linkedAccounts")
+      .withIndex("by_farcaster_fid", (q) => q.eq("account.fid", args.fid))
       .unique();
 
     if (linkedAccount) {
       const user = await ctx.db.get(linkedAccount.userId);
       if (!user) {
         throw new ConvexError({
-          message: 'User not found',
+          message: "User not found",
         });
       }
       // await ctx.db.patch(linkedAccount.userId, {
@@ -40,7 +45,7 @@ export const insertUserByFid = mutation({
       return linkedAccount.userId;
     }
 
-    const userId = await ctx.db.insert('users', {
+    const userId = await ctx.db.insert("users", {
       username: args.username,
       pfpUrl: args.pfpUrl,
       displayName: args.displayName,
@@ -49,9 +54,9 @@ export const insertUserByFid = mutation({
       profileInitializedAt: args.initializedAt,
     });
 
-    await ctx.db.insert('linkedAccounts', {
+    await ctx.db.insert("linkedAccounts", {
       account: {
-        protocol: 'farcaster',
+        protocol: "farcaster",
         fid: args.fid,
         username: args.username,
         pfpUrl: args.pfpUrl,
@@ -67,14 +72,54 @@ export const insertUserByFid = mutation({
   },
 });
 
+export const insertUserByWallet = mutation({
+  args: {
+    ...omit(vv.doc("users").fields, ["_id", "_creationTime"]),
+    currentWalletAddress: v.string(),
+    initializedAt: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const existingUser = await ctx.db
+      .query("users")
+      .withIndex("by_currentWalletAddress", (q) =>
+        q.eq("currentWalletAddress", args.currentWalletAddress),
+      )
+      .unique();
+
+    if (existingUser) {
+      return existingUser._id;
+    }
+
+    const userId = await ctx.db.insert("users", {
+      username: args.username,
+      pfpUrl: args.pfpUrl,
+      displayName: args.displayName,
+      bio: args.bio,
+      currentWalletAddress: args.currentWalletAddress,
+      profileInitializedAt: args.initializedAt,
+    });
+
+    await ctx.db.insert("linkedAccounts", {
+      account: {
+        protocol: "wallet",
+        address: args.currentWalletAddress,
+      },
+      userId,
+      linkedAt: Date.now(),
+    });
+
+    return userId;
+  },
+});
+
 export const getUserByFid = query({
   args: {
     fid: v.number(),
   },
   handler: async (ctx, args) => {
     const linkedAccount = await ctx.db
-      .query('linkedAccounts')
-      .withIndex('by_farcaster_fid', (q) => q.eq('account.fid', args.fid))
+      .query("linkedAccounts")
+      .withIndex("by_farcaster_fid", (q) => q.eq("account.fid", args.fid))
       .unique();
 
     if (!linkedAccount) {
@@ -100,9 +145,29 @@ export const getUserByFid = query({
   },
 });
 
+export const getUserByWallet = query({
+  args: {
+    address: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_currentWalletAddress", (q) =>
+        q.eq("currentWalletAddress", args.address),
+      )
+      .unique();
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
+  },
+});
+
 export const getUserById = query({
   args: {
-    userId: v.id('users'),
+    userId: v.id("users"),
   },
   handler: async (ctx, args) => {
     return await ctx.db.get(args.userId);
@@ -112,7 +177,7 @@ export const getUserById = query({
 // Query para obtener un usuario por su ID de la tabla 'users'
 export const get = internalQuery({
   args: {
-    userId: v.id('users'),
+    userId: v.id("users"),
   },
   handler: async (ctx, args) => {
     return await ctx.db.get(args.userId);
@@ -121,7 +186,7 @@ export const get = internalQuery({
 
 export const updateUserProfile = mutation({
   args: {
-    userId: v.id('users'),
+    userId: v.id("users"),
     bio: v.optional(v.string()),
     displayName: v.optional(v.string()),
     username: v.optional(v.string()),
@@ -132,7 +197,7 @@ export const updateUserProfile = mutation({
         worksAt: v.optional(v.string()),
         roles: v.optional(v.array(v.string())),
         professionalLink: v.optional(v.string()),
-      })
+      }),
     ),
   },
   handler: async (ctx, args) => {
@@ -142,12 +207,12 @@ export const updateUserProfile = mutation({
     const existingUser = await ctx.db.get(userId);
     if (!existingUser) {
       throw new ConvexError({
-        message: 'User not found',
-        code: 'USER_NOT_FOUND',
+        message: "User not found",
+        code: "USER_NOT_FOUND",
       });
     }
 
-    const fieldsToUpdate: Partial<Doc<'users'>> = {};
+    const fieldsToUpdate: Partial<Doc<"users">> = {};
 
     if (updateFields.bio !== undefined) {
       fieldsToUpdate.bio = updateFields.bio;
@@ -170,7 +235,8 @@ export const updateUserProfile = mutation({
     }
 
     if (professionalProfile !== undefined) {
-      const sanitizedProfessionalProfile = sanitizeProfessionalProfile(professionalProfile);
+      const sanitizedProfessionalProfile =
+        sanitizeProfessionalProfile(professionalProfile);
 
       if (sanitizedProfessionalProfile !== null) {
         fieldsToUpdate.professionalProfile = sanitizedProfessionalProfile;
@@ -180,8 +246,8 @@ export const updateUserProfile = mutation({
     // Only proceed if there are fields to update
     if (Object.keys(fieldsToUpdate).length === 0) {
       throw new ConvexError({
-        message: 'No fields provided for update',
-        code: 'NO_UPDATE_FIELDS',
+        message: "No fields provided for update",
+        code: "NO_UPDATE_FIELDS",
       });
     }
 
@@ -189,9 +255,13 @@ export const updateUserProfile = mutation({
   },
 });
 
-const PROFESSIONAL_PROFILE_ROLE_SET = new Set<ProfessionalProfileRole>(PROFESSIONAL_PROFILE_ROLES);
+const PROFESSIONAL_PROFILE_ROLE_SET = new Set<ProfessionalProfileRole>(
+  PROFESSIONAL_PROFILE_ROLES,
+);
 
-const isValidProfessionalRole = (role: string): role is ProfessionalProfileRole =>
+const isValidProfessionalRole = (
+  role: string,
+): role is ProfessionalProfileRole =>
   PROFESSIONAL_PROFILE_ROLE_SET.has(role as ProfessionalProfileRole);
 
 type ProfessionalProfileInput = {
@@ -207,7 +277,7 @@ type SanitizedProfessionalProfile = {
 };
 
 const sanitizeProfessionalProfile = (
-  profile: ProfessionalProfileInput
+  profile: ProfessionalProfileInput,
 ): SanitizedProfessionalProfile | null => {
   const sanitized: SanitizedProfessionalProfile = {};
 
@@ -216,8 +286,8 @@ const sanitizeProfessionalProfile = (
 
     if (trimmed.length > 100) {
       throw new ConvexError({
-        message: 'Company or protocol name must be less than 100 characters',
-        code: 'INVALID_PROFESSIONAL_PROFILE',
+        message: "Company or protocol name must be less than 100 characters",
+        code: "INVALID_PROFESSIONAL_PROFILE",
       });
     }
 
@@ -230,8 +300,8 @@ const sanitizeProfessionalProfile = (
 
     if (typedRoles.length !== uniqueRoles.length) {
       throw new ConvexError({
-        message: 'One or more roles are not supported',
-        code: 'INVALID_PROFESSIONAL_PROFILE',
+        message: "One or more roles are not supported",
+        code: "INVALID_PROFESSIONAL_PROFILE",
       });
     }
 
@@ -246,15 +316,15 @@ const sanitizeProfessionalProfile = (
     } else {
       if (trimmed.length > 2048) {
         throw new ConvexError({
-          message: 'Professional link is too long',
-          code: 'INVALID_PROFESSIONAL_PROFILE',
+          message: "Professional link is too long",
+          code: "INVALID_PROFESSIONAL_PROFILE",
         });
       }
 
       if (!/^https?:\/\//i.test(trimmed)) {
         throw new ConvexError({
-          message: 'Professional link must start with http or https',
-          code: 'INVALID_PROFESSIONAL_PROFILE',
+          message: "Professional link must start with http or https",
+          code: "INVALID_PROFESSIONAL_PROFILE",
         });
       }
 
@@ -270,7 +340,7 @@ const sanitizeProfessionalProfile = (
  */
 export const updateUserSocials = mutation({
   args: {
-    userId: v.id('users'),
+    userId: v.id("users"),
     socials: v.object({
       x: v.optional(v.string()),
       linkedin: v.optional(v.string()),
@@ -283,8 +353,8 @@ export const updateUserSocials = mutation({
     const existingUser = await ctx.db.get(userId);
     if (!existingUser) {
       throw new ConvexError({
-        message: 'User not found',
-        code: 'USER_NOT_FOUND',
+        message: "User not found",
+        code: "USER_NOT_FOUND",
       });
     }
 
@@ -292,15 +362,15 @@ export const updateUserSocials = mutation({
     const urlRegex = /^https?:\/\/.+/;
     if (socials.x && !urlRegex.test(socials.x)) {
       throw new ConvexError({
-        message: 'Invalid X (Twitter) URL format',
-        code: 'INVALID_URL',
+        message: "Invalid X (Twitter) URL format",
+        code: "INVALID_URL",
       });
     }
 
     if (socials.linkedin && !urlRegex.test(socials.linkedin)) {
       throw new ConvexError({
-        message: 'Invalid LinkedIn URL format',
-        code: 'INVALID_URL',
+        message: "Invalid LinkedIn URL format",
+        code: "INVALID_URL",
       });
     }
 
@@ -314,20 +384,20 @@ export const updateUserSocials = mutation({
  */
 export const updateUserProfileInternalWithFarcaster = internalMutation({
   args: {
-    userId: v.id('users'),
+    userId: v.id("users"),
     fid: v.number(),
     bio: v.optional(v.string()),
     displayName: v.optional(v.string()),
     username: v.optional(v.string()),
     pfpUrl: v.optional(v.string()),
-    linkedAccountId: v.id('linkedAccounts'),
+    linkedAccountId: v.id("linkedAccounts"),
   },
   handler: async (ctx, args) => {
     const { userId, linkedAccountId, fid, ...updateFields } = args;
 
     // Filter out undefined values to avoid removing fields unintentionally
     const fieldsToUpdate = Object.fromEntries(
-      Object.entries(updateFields).filter(([_, value]) => value !== undefined)
+      Object.entries(updateFields).filter(([_, value]) => value !== undefined),
     );
 
     // Only proceed if there are fields to update
@@ -338,7 +408,7 @@ export const updateUserProfileInternalWithFarcaster = internalMutation({
 
     await ctx.db.patch(linkedAccountId, {
       account: {
-        protocol: 'farcaster',
+        protocol: "farcaster",
         fid,
         ...fieldsToUpdate,
         lastSyncedAt: Date.now(),

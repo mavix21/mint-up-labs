@@ -1,6 +1,7 @@
-import { v } from 'convex/values';
-import { query } from './_generated/server';
-import type { Id } from './_generated/dataModel';
+import { v } from "convex/values";
+
+import type { Id } from "./_generated/dataModel";
+import { query } from "./_generated/server";
 
 /**
  * Get all communities with basic stats
@@ -9,33 +10,39 @@ export const getAllCommunities = query({
   args: {},
   returns: v.array(
     v.object({
-      _id: v.id('organizations'),
+      _id: v.id("organizations"),
       name: v.string(),
       description: v.optional(v.string()),
       logoUrl: v.union(v.string(), v.null()),
       memberCount: v.number(),
       eventCount: v.number(),
-    })
+    }),
   ),
   handler: async (ctx) => {
-    const communities = await ctx.db.query('organizations').collect();
+    const communities = await ctx.db.query("organizations").collect();
 
     return Promise.all(
       communities.map(async (community) => {
         // Get member count
         const memberships = await ctx.db
-          .query('organizationMembers')
-          .withIndex('by_organizationId', (q) => q.eq('organizationId', community._id))
+          .query("organizationMembers")
+          .withIndex("by_organizationId", (q) =>
+            q.eq("organizationId", community._id),
+          )
           .collect();
 
         // Get event count
         const events = await ctx.db
-          .query('events')
-          .withIndex('by_organizationId', (q) => q.eq('organizationId', community._id))
+          .query("events")
+          .withIndex("by_organizationId", (q) =>
+            q.eq("organizationId", community._id),
+          )
           .collect();
 
         // Get logo URL
-        const logoUrl = community.logoUrl ? await ctx.storage.getUrl(community.logoUrl) : null;
+        const logoUrl = community.logoUrl
+          ? await ctx.storage.getUrl(community.logoUrl)
+          : null;
 
         return {
           _id: community._id,
@@ -45,7 +52,7 @@ export const getAllCommunities = query({
           memberCount: memberships.length,
           eventCount: events.length,
         };
-      })
+      }),
     );
   },
 });
@@ -60,13 +67,13 @@ export const getCommunityProfile = query({
   returns: v.union(
     v.null(),
     v.object({
-      _id: v.id('organizations'),
+      _id: v.id("organizations"),
       name: v.string(),
       description: v.optional(v.string()),
       logoUrl: v.union(v.string(), v.null()),
       bannerUrl: v.null(),
       creator: v.object({
-        _id: v.optional(v.id('users')),
+        _id: v.optional(v.id("users")),
         name: v.optional(v.string()),
       }),
       stats: v.object({
@@ -75,7 +82,7 @@ export const getCommunityProfile = query({
       }),
       events: v.array(
         v.object({
-          _id: v.id('events'),
+          _id: v.id("events"),
           name: v.string(),
           description: v.optional(v.string()),
           startDate: v.number(),
@@ -83,26 +90,26 @@ export const getCommunityProfile = query({
           location: v.any(),
           imageUrl: v.union(v.string(), v.null()),
           registrationCount: v.number(),
-        })
+        }),
       ),
       members: v.array(
         v.object({
-          _id: v.id('users'),
+          _id: v.id("users"),
           name: v.optional(v.string()),
           imageUrl: v.union(v.string(), v.null()),
-          role: v.union(v.literal('admin'), v.literal('member')),
-        })
+          role: v.union(v.literal("admin"), v.literal("member")),
+        }),
       ),
-    })
+    }),
   ),
   handler: async (ctx, args) => {
     // Try to get the community by ID, but handle invalid IDs gracefully
     let community = null;
     try {
-      community = await ctx.db.get(args.communityId as Id<'organizations'>);
+      community = await ctx.db.get(args.communityId as Id<"organizations">);
     } catch (idError) {
       // If the ID is invalid, return null instead of throwing
-      console.log('Invalid community ID provided:', args.communityId);
+      console.log("Invalid community ID provided:", args.communityId);
       return null;
     }
 
@@ -113,20 +120,22 @@ export const getCommunityProfile = query({
 
     // Get all events for this community
     const events = await ctx.db
-      .query('events')
-      .withIndex('by_organizationId', (q) =>
-        q.eq('organizationId', args.communityId as Id<'organizations'>)
+      .query("events")
+      .withIndex("by_organizationId", (q) =>
+        q.eq("organizationId", args.communityId as Id<"organizations">),
       )
       .collect();
 
     // Get event details with additional info
     const eventsWithDetails = await Promise.all(
       events.map(async (event) => {
-        const imageUrl = event.image ? await ctx.storage.getUrl(event.image) : null;
+        const imageUrl = event.image
+          ? await ctx.storage.getUrl(event.image)
+          : null;
         const registrationsCount = await ctx.db
-          .query('registrations')
-          .withIndex('by_event', (q) => q.eq('eventId', event._id))
-          .filter((q) => q.neq(q.field('status.type'), 'rejected'))
+          .query("registrations")
+          .withIndex("by_event", (q) => q.eq("eventId", event._id))
+          .filter((q) => q.neq(q.field("status.type"), "rejected"))
           .collect();
 
         return {
@@ -139,14 +148,14 @@ export const getCommunityProfile = query({
           imageUrl,
           registrationCount: registrationsCount.length,
         };
-      })
+      }),
     );
 
     // Get all members
     const memberships = await ctx.db
-      .query('organizationMembers')
-      .withIndex('by_organizationId', (q) =>
-        q.eq('organizationId', args.communityId as Id<'organizations'>)
+      .query("organizationMembers")
+      .withIndex("by_organizationId", (q) =>
+        q.eq("organizationId", args.communityId as Id<"organizations">),
       )
       .collect();
 
@@ -162,11 +171,13 @@ export const getCommunityProfile = query({
           imageUrl: user.pfpUrl,
           role: membership.role,
         };
-      })
+      }),
     );
 
     // Get community logo URL
-    const logoUrl = community.logoUrl ? await ctx.storage.getUrl(community.logoUrl) : null;
+    const logoUrl = community.logoUrl
+      ? await ctx.storage.getUrl(community.logoUrl)
+      : null;
 
     return {
       _id: community._id,
