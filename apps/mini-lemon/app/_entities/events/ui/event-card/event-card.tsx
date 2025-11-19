@@ -21,10 +21,7 @@ const EventCardRoot = React.forwardRef<HTMLDivElement, EventCardRootProps>(
       <EventCardContext.Provider value={{ variant }}>
         <Card
           ref={ref}
-          className={cn(
-            "gap-0 border-0 bg-[#161618] p-3 shadow-none",
-            className,
-          )}
+          className={cn("bg-card gap-0 border-0 p-3 shadow-none", className)}
           {...props}
         >
           <div className="flex gap-3">{children}</div>
@@ -134,7 +131,7 @@ interface EventCardImageProps
 }
 
 const EventCardImage = React.forwardRef<HTMLDivElement, EventCardImageProps>(
-  ({ src, alt, className, ...props }, ref) => {
+  ({ src, alt, className }, ref) => {
     return (
       <div ref={ref} className="shrink-0">
         {/* Reduced rounded-lg to rounded-md to match the sharper design */}
@@ -145,8 +142,8 @@ const EventCardImage = React.forwardRef<HTMLDivElement, EventCardImageProps>(
           )}
         >
           <Image
-            src={src || "/placeholder.svg"}
-            alt={alt || "Event image"}
+            src={src ?? "/placeholder.svg"}
+            alt={alt ?? "Event image"}
             fill
             className="object-cover"
           />
