@@ -1,3 +1,4 @@
+import type { Address } from "viem";
 import * as React from "react";
 import {
   authenticate,
@@ -10,9 +11,31 @@ import {
   useSession,
 } from "next-auth/react";
 
+type AuthState =
+  | {
+      type: "success";
+      wallet: Address;
+      signature: Hex;
+      message: string;
+    }
+  | {
+      type: "error";
+      error: {
+        message: string;
+        code: string;
+      };
+    }
+  | {
+      type: "canceled";
+    }
+  | {
+      type: "loading";
+    };
+
 export const useSignIn = () => {
   const { data: session, status } = useSession();
   const [isAuthenticating, setIsAuthenticating] = React.useState(false);
+  const [wallet, setWallet] = React.useState<Address | null>(null);
 
   const handleSignIn = React.useCallback(async () => {
     setIsAuthenticating(true);
@@ -31,8 +54,7 @@ export const useSignIn = () => {
         throw new Error("Sign in with Lemon failed", { cause: result.error });
       }
       if (result.result === TransactionResult.CANCELLED) {
-        console.warn("Sign in with Lemon cancelled");
-        return;
+        throw new Error("Sign in with Lemon was cancelled by the user");
       }
 
       const { message, signature, wallet, claims } = result.data;
@@ -46,15 +68,17 @@ export const useSignIn = () => {
       });
 
       if (!response?.ok) {
-        console.error("[NextAuth] Sign in with Lemon failed", {
-          cause: response?.error,
-        });
         throw new Error("[NextAuth] Sign in with Lemon failed", {
           cause: response?.error,
         });
       }
+      setWallet(wallet);
     } catch (e) {
-      console.error("[NextAuth] Sign in with Lemon failed", { cause: e });
+      if (e instanceof Error) {
+        console.error("[NextAuth] Sign in with Lemon failed", { cause: e });
+        return;
+      }
+      console.error("Unexpected error during sign in with Lemon", { error: e });
     } finally {
       setIsAuthenticating(false);
     }
@@ -65,5 +89,6 @@ export const useSignIn = () => {
     session,
     isSignedIn: status === "authenticated",
     isLoading: isAuthenticating || status === "loading",
+    wallet,
   };
 };
