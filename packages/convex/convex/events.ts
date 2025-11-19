@@ -10,8 +10,6 @@ import {
 import { privateKeyToAccount } from "viem/accounts";
 import { base, baseSepolia } from "viem/chains"; // Usa la red correcta
 
-// import { abi } from "../../app/shared/lib/abi";
-// import { pinata } from "../../app/shared/lib/pinata.config";
 import { internal } from "./_generated/api";
 import { Doc, Id } from "./_generated/dataModel";
 import {
@@ -22,14 +20,18 @@ import {
   query,
   QueryCtx,
 } from "./_generated/server";
+import { pinata } from "./config/pinata.config";
+import { abi } from "./constants/abi";
 import { vv } from "./schema";
 
 const CHAIN = process.env.ENV === "production" ? base : baseSepolia;
-// const CHAIN = base;
+// const CHAIN = baseSepolia; // TODO: change to mainnet when deploying to production
 
 // --- CONSTANTES ---
 const CONTRACT_ADDRESS = process.env
   .MINTUP_FACTORY_CONTRACT_ADDRESS as `0x${string}`;
+
+const BASE_RPC_URL = process.env.BASE_RPC_URL;
 
 // --- HELPERS DE VIEM ---
 // Creamos los clientes de Viem una sola vez para reutilizarlos.
@@ -40,12 +42,12 @@ const account = privateKeyToAccount(
 const walletClient = createWalletClient({
   account,
   chain: CHAIN,
-  transport: http(process.env.BASE_RPC_URL),
+  transport: http(BASE_RPC_URL),
 });
 
 const publicClient = createPublicClient({
   chain: CHAIN,
-  transport: http(process.env.BASE_RPC_URL),
+  transport: http(BASE_RPC_URL),
 });
 
 // Shared helper function to enrich events with common data
@@ -375,12 +377,12 @@ export const createEvent = mutation({
 
     if (onchainTickets.length === 0) return eventId;
 
-    // await ctx.scheduler.runAfter(0, internal.events.createEventOnchain, {
-    //   convexEventId: eventId,
-    //   convexTicketTemplateIds: onchainTicketTemplateIds,
-    //   organizerAddress: user.currentWalletAddress ?? "",
-    //   ticketsData: onchainTickets,
-    // });
+    await ctx.scheduler.runAfter(0, internal.events.createEventOnchain, {
+      convexEventId: eventId,
+      convexTicketTemplateIds: onchainTicketTemplateIds,
+      organizerAddress: user.currentWalletAddress ?? "",
+      ticketsData: onchainTickets,
+    });
 
     return eventId;
   },
@@ -480,160 +482,160 @@ export const getUserEvents = query({
   },
 });
 
-// export const createEventOnchain = internalAction({
-//   args: {
-//     convexEventId: v.id("events"),
-//     convexTicketTemplateIds: v.array(v.id("ticketTemplates")),
-//     organizerAddress: v.string(),
-//     ticketsData: v.array(
-//       v.object({
-//         ...pick(vv.doc("ticketTemplates").fields, [
-//           "name",
-//           "description",
-//           "totalSupply",
-//           "isApprovalRequired",
-//         ]),
-//         ticketType: v.object({
-//           type: v.literal("onchain"),
-//           price: v.object({
-//             amount: v.number(),
-//             currency: v.union(v.literal("USDC")),
-//           }),
-//           imageUrl: v.string(),
-//         }),
-//       }),
-//     ),
-//   },
-//   handler: async (ctx, args) => {
-//     if (
-//       !process.env.BACKEND_SIGNER_PRIVATE_KEY ||
-//       !process.env.BASE_RPC_URL ||
-//       !CONTRACT_ADDRESS
-//     ) {
-//       throw new Error(
-//         "Missing required environment variables for on-chain interaction.",
-//       );
-//     }
+export const createEventOnchain = internalAction({
+  args: {
+    convexEventId: v.id("events"),
+    convexTicketTemplateIds: v.array(v.id("ticketTemplates")),
+    organizerAddress: v.string(),
+    ticketsData: v.array(
+      v.object({
+        ...pick(vv.doc("ticketTemplates").fields, [
+          "name",
+          "description",
+          "totalSupply",
+          "isApprovalRequired",
+        ]),
+        ticketType: v.object({
+          type: v.literal("onchain"),
+          price: v.object({
+            amount: v.number(),
+            currency: v.union(v.literal("USDC")),
+          }),
+          imageUrl: v.string(),
+        }),
+      }),
+    ),
+  },
+  handler: async (ctx, args) => {
+    if (
+      !process.env.BACKEND_SIGNER_PRIVATE_KEY ||
+      !BASE_RPC_URL ||
+      !CONTRACT_ADDRESS
+    ) {
+      throw new Error(
+        "Missing required environment variables for on-chain interaction.",
+      );
+    }
 
-//     try {
-//       // Upload metadata for each ticket
-//       const ticketParams = await Promise.all(
-//         args.ticketsData.map(async (t) => {
-//           let metadataURI = "";
-//           try {
-//             const upload = await pinata.upload.public.json({
-//               name: t.name,
-//               description: t.description,
-//               image: t.ticketType.imageUrl,
-//               attributes: [
-//                 {
-//                   trait_type: "Type",
-//                   value: t.name,
-//                 },
-//               ],
-//             });
-//             metadataURI = `https://${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${upload.cid}`;
-//           } catch (error) {
-//             console.error("Error uploading metadata to Pinata:", error);
-//             metadataURI = t.ticketType.imageUrl;
-//           }
+    try {
+      // Upload metadata for each ticket
+      const ticketParams = await Promise.all(
+        args.ticketsData.map(async (t) => {
+          let metadataURI = "";
+          try {
+            const upload = await pinata.upload.public.json({
+              name: t.name,
+              description: t.description,
+              image: t.ticketType.imageUrl,
+              attributes: [
+                {
+                  trait_type: "Type",
+                  value: t.name,
+                },
+              ],
+            });
+            metadataURI = `https://${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${upload.cid}`;
+          } catch (error) {
+            console.error("Error uploading metadata to Pinata:", error);
+            metadataURI = t.ticketType.imageUrl;
+          }
 
-//           return {
-//             priceETH: 0n,
-//             priceUSDC:
-//               t.ticketType.price.currency === "USDC"
-//                 ? parseUnits(t.ticketType.price.amount.toString(), 6)
-//                 : 0n,
-//             maxSupply: BigInt(t.totalSupply || 0),
-//             mintsPerWallet: 1n, // TODO: organizer should be able to set this
-//             metadataURI,
-//           };
-//         }),
-//       );
+          return {
+            priceETH: 0n,
+            priceUSDC:
+              t.ticketType.price.currency === "USDC"
+                ? parseUnits(t.ticketType.price.amount.toString(), 6)
+                : 0n,
+            maxSupply: BigInt(t.totalSupply || 0),
+            mintsPerWallet: 1n, // TODO: organizer should be able to set this
+            metadataURI,
+          };
+        }),
+      );
 
-//       console.log(`[Event: ${args.convexEventId}] Simulating contract call...`);
-//       const { request } = await publicClient.simulateContract({
-//         account,
-//         address: CONTRACT_ADDRESS,
-//         abi: abi,
-//         functionName: "createEventWithTickets",
-//         args: [args.organizerAddress as `0x${string}`, ticketParams],
-//       });
+      console.log(`[Event: ${args.convexEventId}] Simulating contract call...`);
+      const { request } = await publicClient.simulateContract({
+        account,
+        address: CONTRACT_ADDRESS,
+        abi: abi,
+        functionName: "createEventWithTickets",
+        args: [args.organizerAddress as `0x${string}`, ticketParams],
+      });
 
-//       console.log(`[Event: ${args.convexEventId}] Sending transaction...`);
-//       const txHash = await walletClient.writeContract(request);
-//       console.log(
-//         `[Event: ${args.convexEventId}] Transaction sent with hash: ${txHash}. Waiting for receipt...`,
-//       );
+      console.log(`[Event: ${args.convexEventId}] Sending transaction...`);
+      const txHash = await walletClient.writeContract(request);
+      console.log(
+        `[Event: ${args.convexEventId}] Transaction sent with hash: ${txHash}. Waiting for receipt...`,
+      );
 
-//       const receipt = await publicClient.waitForTransactionReceipt({
-//         hash: txHash,
-//       });
+      const receipt = await publicClient.waitForTransactionReceipt({
+        hash: txHash,
+      });
 
-//       if (receipt.status === "reverted") {
-//         throw new Error("Transaction reverted.");
-//       }
+      if (receipt.status === "reverted") {
+        throw new Error("Transaction reverted.");
+      }
 
-//       let onchainEventId: string | null = null;
-//       for (const log of receipt.logs) {
-//         try {
-//           const decodedLog = decodeEventLog({
-//             abi: abi,
-//             data: log.data,
-//             topics: log.topics,
-//           });
-//           if (decodedLog.eventName === "EventCreated") {
-//             onchainEventId = (decodedLog.args as any).eventId.toString();
-//             break;
-//           }
-//         } catch {
-//           throw new Error("Error inside trying read receipt.log");
-//         }
-//       }
+      let onchainEventId: string | null = null;
+      for (const log of receipt.logs) {
+        try {
+          const decodedLog = decodeEventLog({
+            abi: abi,
+            data: log.data,
+            topics: log.topics,
+          });
+          if (decodedLog.eventName === "EventCreated") {
+            onchainEventId = (decodedLog.args as any).eventId.toString();
+            break;
+          }
+        } catch {
+          throw new Error("Error inside trying read receipt.log");
+        }
+      }
 
-//       if (!onchainEventId) {
-//         throw new Error(
-//           "Could not find EventCreated log in transaction receipt",
-//         );
-//       }
+      if (!onchainEventId) {
+        throw new Error(
+          "Could not find EventCreated log in transaction receipt",
+        );
+      }
 
-//       console.log(
-//         `[Event: ${args.convexEventId}] On-chain event created with ID: ${onchainEventId}.`,
-//       );
+      console.log(
+        `[Event: ${args.convexEventId}] On-chain event created with ID: ${onchainEventId}.`,
+      );
 
-//       const ticketUpdates = args.convexTicketTemplateIds.map(
-//         (templateId, index) => {
-//           const ticketIndex = BigInt(index);
-//           const tokenId =
-//             (BigInt(onchainEventId as string) << 128n) | ticketIndex;
-//           return {
-//             templateId: templateId,
-//             tokenId: tokenId.toString(),
-//             metadataURI: ticketParams[index].metadataURI,
-//           };
-//         },
-//       );
+      const ticketUpdates = args.convexTicketTemplateIds.map(
+        (templateId, index) => {
+          const ticketIndex = BigInt(index);
+          const tokenId =
+            (BigInt(onchainEventId as string) << 128n) | ticketIndex;
+          return {
+            templateId: templateId,
+            tokenId: tokenId.toString(),
+            metadataURI: ticketParams[index].metadataURI,
+          };
+        },
+      );
 
-//       await ctx.runMutation(internal.events.finalizeOnchainSync, {
-//         convexEventId: args.convexEventId,
-//         onchainEventId: onchainEventId,
-//         contractAddress: CONTRACT_ADDRESS,
-//         chainId: CHAIN.id,
-//         ticketUpdates,
-//       });
+      await ctx.runMutation(internal.events.finalizeOnchainSync, {
+        convexEventId: args.convexEventId,
+        onchainEventId: onchainEventId,
+        contractAddress: CONTRACT_ADDRESS,
+        chainId: CHAIN.id,
+        ticketUpdates,
+      });
 
-//       console.log(
-//         `[Event: ${args.convexEventId}] Successfully synced on-chain data to Convex.`,
-//       );
-//     } catch (error) {
-//       console.error(
-//         `[Event: ${args.convexEventId}] On-chain sync failed:`,
-//         error,
-//       );
-//       throw error;
-//     }
-//   },
-// });
+      console.log(
+        `[Event: ${args.convexEventId}] Successfully synced on-chain data to Convex.`,
+      );
+    } catch (error) {
+      console.error(
+        `[Event: ${args.convexEventId}] On-chain sync failed:`,
+        error,
+      );
+      throw error;
+    }
+  },
+});
 
 export const finalizeOnchainSync = internalMutation({
   args: {

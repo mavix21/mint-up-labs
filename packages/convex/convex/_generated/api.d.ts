@@ -11,6 +11,7 @@
 import type * as authAdapter from "../authAdapter.js";
 import type * as communities from "../communities.js";
 import type * as connections from "../connections.js";
+import type * as constants_abi from "../constants/abi.js";
 import type * as constants_professionalProfile from "../constants/professionalProfile.js";
 import type * as events from "../events.js";
 import type * as farcaster from "../farcaster.js";
@@ -49,6 +50,7 @@ declare const fullApi: ApiFromModules<{
   authAdapter: typeof authAdapter;
   communities: typeof communities;
   connections: typeof connections;
+  "constants/abi": typeof constants_abi;
   "constants/professionalProfile": typeof constants_professionalProfile;
   events: typeof events;
   farcaster: typeof farcaster;
