@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "@mint-up/ui/globals.css";
+import "@farcaster/auth-kit/styles.css";
 
 import { getSession } from "@/auth";
 
@@ -40,7 +41,12 @@ export default async function RootLayout({
       >
         <AuthKitProvider>
           <ConvexClientProvider session={session}>
-            <ThemeProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
               <AppHeader />
               <div>{children}</div>
               <BottomNav />
