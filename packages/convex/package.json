@@ -13,10 +13,33 @@
   "license": "ISC",
   "dependencies": {
     "convex": "^1.29.2",
-    "convex-helpers": "^0.1.105"
+    "convex-helpers": "^0.1.105",
+    "viem": "^2.31.6"
   },
   "devDependencies": {
     "typescript": "catalog:"
+  },
+  "exports": {
+    "./_generated/*": {
+      "types": "./convex/_generated/*.d.ts",
+      "default": "./convex/_generated/*.js"
+    },
+    "./nextjs": {
+      "types": "./convex/nextjs.ts",
+      "default": "./convex/nextjs.ts"
+    },
+    "./react": {
+      "types": "./convex/react.ts",
+      "default": "./convex/react.ts"
+    },
+    "./server": {
+      "types": "./convex/server.ts",
+      "default": "./convex/server.ts"
+    },
+    "./neynar": {
+      "types": "./neynar.ts",
+      "default": "./neynar.ts"
+    }
   },
   "prettier": "@mint-up/prettier-config"
 }
