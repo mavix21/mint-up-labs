@@ -21,7 +21,7 @@ export function CreateEventFab({ className }: CreateEventFabProps) {
         console.log("[v0] Create event button clicked");
       }}
     >
-      <Plus className="text-primary-foreground h-6 w-6" />
+      <Plus className="text-primary-foreground size-5" />
       <span className="sr-only">Create Event</span>
     </Button>
   );
