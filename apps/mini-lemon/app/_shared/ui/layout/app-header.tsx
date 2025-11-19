@@ -1,3 +1,6 @@
+"use client";
+
+import { isWebView } from "@lemoncash/mini-app-sdk";
 import { Settings } from "lucide-react";
 
 import { Button } from "@mint-up/ui/components/button";
@@ -10,8 +13,7 @@ export function AppHeader() {
     <header className="bg-background/80 sticky top-0 z-50 backdrop-blur-xl">
       <div className="px-4 py-3">
         <div className="flex items-center justify-between">
-          <SignInWithFarcaster />
-
+          {!isWebView() && <SignInWithFarcaster />}
           <div className="flex items-center gap-2">
             <ThemeSwitcher />
             <Button
