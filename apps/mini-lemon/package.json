@@ -14,13 +14,15 @@
     "@t3-oss/env-nextjs": "^0.13.8",
     "@tailwindcss/postcss": "catalog:",
     "@tanstack/react-query": "catalog:",
+    "better-auth": "^1.3.34",
     "next": "16.0.3",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "tailwindcss": "catalog:",
     "viem": "^2.31.6",
     "wagmi": "^2.16.3",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "@convex-dev/better-auth": "^0.9.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
