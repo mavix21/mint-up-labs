@@ -17,6 +17,7 @@ export const env = createEnv({
     // POSTGRES_URL: z.string().url(),
     CONVEX_AUTH_PRIVATE_KEY: z.string(),
     NEXTAUTH_SECRET: z.string(),
+    NEXTAUTH_URL: z.string().url().optional(),
   },
 
   /**
