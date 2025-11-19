@@ -43,9 +43,9 @@ export function EventDateGroup({ dateGroup }: EventDateGroupProps) {
 
   return (
     <div className="relative pl-6">
-      <div className="bg-border/30 absolute top-2 bottom-0 left-[9px] w-[2px]" />
+      <div className="bg-border/30 absolute top-2 bottom-0 left-[9px] w-0.5" />
 
-      <div className="bg-muted-foreground ring-background absolute top-2.5 left-[5px] h-2.5 w-2.5 rounded-full ring-4" />
+      <div className="bg-muted-foreground ring-background absolute top-2 left-[5px] h-2.5 w-2.5 rounded-full ring-4" />
 
       <div className="mb-3">
         <h2 className="text-muted-foreground text-base font-medium">
