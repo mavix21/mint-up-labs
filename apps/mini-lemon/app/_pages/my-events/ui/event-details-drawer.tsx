@@ -64,14 +64,14 @@ export function EventDetailsDrawer({
         </div>
 
         {/* Close button */}
-        <DrawerClose className="absolute top-4 left-4 z-20 rounded-full bg-black/20 p-2 text-white backdrop-blur-md transition-colors hover:bg-black/40">
+        <DrawerClose className="bg-overlay text-foreground hover:bg-overlay-hover absolute top-4 left-4 z-20 rounded-full p-2 backdrop-blur-md transition-colors">
           <ChevronDown className="h-6 w-6" />
         </DrawerClose>
 
         {/* Scrollable content */}
         <div className="no-scrollbar flex-1 overflow-y-auto">
           {/* Hero image */}
-          <div className="relative aspect-square w-full sm:aspect-[16/10]">
+          <div className="relative aspect-square w-full sm:aspect-16/10">
             <Image
               src={event.imageUrl ?? "/placeholder.svg"}
               alt={event.name}
@@ -79,43 +79,43 @@ export function EventDetailsDrawer({
               className="object-cover"
               priority
             />
-            <div className="to-background/90 absolute inset-0 bg-linear-to-b from-black/30 via-transparent" />
+            <div className="to-background/90 from-overlay absolute inset-0 bg-linear-to-b via-transparent" />
           </div>
 
           {/* Content */}
           <div className="relative z-10 -mt-6 px-5 pb-10">
             {/* Title */}
-            <h1 className="mb-2 text-[28px] leading-tight font-bold tracking-tight text-white">
+            <h1 className="text-foreground mb-2 text-[28px] leading-tight font-bold tracking-tight">
               {event.name}
             </h1>
 
             {/* Date/Time */}
-            <p className="mb-4 text-[15px] font-medium tracking-wide text-[#4ADE80]">
+            <p className="text-success mb-4 text-[15px] font-medium tracking-wide">
               {formattedDate} • {formattedTime} {timezone.offset}
             </p>
 
             {/* Attendance status */}
             {isAttending && (
-              <p className="mb-6 flex items-center gap-2 text-[15px] font-medium text-white/90">
+              <p className="text-foreground/90 mb-6 flex items-center gap-2 text-[15px] font-medium">
                 You&apos;re in! <span className="text-lg">✨</span>
               </p>
             )}
 
             {/* Action buttons */}
             <div className="mb-8 flex gap-3">
-              <Button className="h-12 flex-1 rounded-xl border border-[#5C4018] bg-[#3F2E18] text-[15px] font-semibold text-[#FFD700] hover:bg-[#4F3A20]">
+              <Button className="border-warning/30 bg-warning/10 text-warning hover:bg-warning/20 h-12 flex-1 rounded-xl border text-[15px] font-semibold">
                 View Ticket
               </Button>
               <Button
                 variant="outline"
-                className="h-12 rounded-xl border-[#1C3A2E] bg-[#0F1F18] px-5 font-medium text-[#4ADE80] hover:bg-[#162B22]"
+                className="border-success/30 bg-success/10 text-success hover:bg-success/20 h-12 rounded-xl px-5 font-medium"
               >
                 <Share2 className="mr-2 h-4 w-4" />
                 Share
               </Button>
               <Button
                 variant="outline"
-                className="h-12 w-12 rounded-xl border-[#1C3A2E] bg-[#0F1F18] p-0 text-[#4ADE80] hover:bg-[#162B22]"
+                className="border-success/30 bg-success/10 text-success hover:bg-success/20 h-12 w-12 rounded-xl p-0"
               >
                 <MoreVertical className="h-4 w-4" />
               </Button>
@@ -123,58 +123,60 @@ export function EventDetailsDrawer({
 
             {/* Location Section */}
             <div className="mb-8">
-              <h3 className="mb-4 text-[17px] font-bold text-white">
+              <h3 className="text-foreground mb-4 text-[17px] font-bold">
                 Location
               </h3>
               <div className="flex items-start gap-3">
-                <Globe className="mt-0.5 h-5 w-5 shrink-0 text-white/70" />
+                <Globe className="text-muted-foreground mt-0.5 h-5 w-5 shrink-0" />
                 <div className="min-w-0 flex-1">
                   {locationUrl ? (
                     <a
                       href={locationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-start gap-2 text-[15px] leading-relaxed break-all text-white hover:underline"
+                      className="text-foreground flex items-start gap-2 text-[15px] leading-relaxed break-all hover:underline"
                     >
                       <span className="line-clamp-2 flex-1">{locationUrl}</span>
-                      <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-white/50" />
+                      <ExternalLink className="text-muted-foreground mt-0.5 h-4 w-4 shrink-0" />
                     </a>
                   ) : (
-                    <p className="text-[15px] text-white">
-                      {locationAddress || "TBD"}
+                    <p className="text-foreground text-[15px]">
+                      {locationAddress ?? "TBD"}
                     </p>
                   )}
-                  <p className="mt-1 text-sm text-white/50">
+                  <p className="text-muted-foreground mt-1 text-sm">
                     {event.location.type === "online"
                       ? "Online Event"
                       : "In Person Event"}
                   </p>
                 </div>
               </div>
-              <div className="mt-6 h-px w-full bg-white/10" />
+              <div className="bg-border mt-6 h-px w-full" />
             </div>
 
             {/* Host Section */}
             <div className="mb-8">
-              <h3 className="mb-4 text-[17px] font-bold text-white">Host</h3>
+              <h3 className="text-foreground mb-4 text-[17px] font-bold">
+                Host
+              </h3>
               <div className="flex items-center gap-3">
-                <Avatar className="h-12 w-12 border border-white/10">
+                <Avatar className="border-border h-12 w-12 border">
                   <AvatarImage
-                    src={event.creator.imageUrl || "/placeholder.svg"}
+                    src={event.creator.imageUrl ?? "/placeholder.svg"}
                   />
                   <AvatarFallback>{event.creator.name[0]}</AvatarFallback>
                 </Avatar>
-                <span className="text-[15px] font-bold text-white">
+                <span className="text-foreground text-[15px] font-bold">
                   {event.creator.name}
                 </span>
               </div>
-              <div className="mt-6 h-px w-full bg-white/10" />
+              <div className="bg-border mt-6 h-px w-full" />
             </div>
 
             {/* Attendees Section */}
             {event.registrationCount > 0 && (
               <div className="mb-8">
-                <h3 className="mb-4 text-[17px] font-bold text-white">
+                <h3 className="text-foreground mb-4 text-[17px] font-bold">
                   {event.registrationCount} attendees
                 </h3>
                 <div className="flex items-center -space-x-3">
@@ -184,23 +186,23 @@ export function EventDetailsDrawer({
                       className="border-background h-10 w-10 border-2"
                     >
                       <AvatarImage
-                        src={attendee.pfpUrl || "/placeholder.svg"}
+                        src={attendee.pfpUrl ?? "/placeholder.svg"}
                       />
                       <AvatarFallback>{attendee.displayName[0]}</AvatarFallback>
                     </Avatar>
                   ))}
                 </div>
-                <div className="mt-6 h-px w-full bg-white/10" />
+                <div className="bg-border mt-6 h-px w-full" />
               </div>
             )}
 
             {/* About Event Section */}
             {event.description && (
               <div className="mb-8">
-                <h3 className="mb-4 text-[17px] font-bold text-white">
+                <h3 className="text-foreground mb-4 text-[17px] font-bold">
                   About event
                 </h3>
-                <div className="space-y-1 text-[15px] leading-relaxed text-white/90">
+                <div className="text-foreground/90 space-y-1 text-[15px] leading-relaxed">
                   {event.description.split("\n").map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                   ))}
