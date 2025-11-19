@@ -5,6 +5,9 @@ import {
   isWebView,
   TransactionResult,
 } from "@lemoncash/mini-app-sdk";
+import { baseSepolia } from "viem/chains";
+
+import { authClient } from "@/src/lib/auth-client";
 
 type AuthState =
   | {
@@ -28,7 +31,6 @@ type AuthState =
     };
 
 interface MiniAppContextType {
-  wallet: `0x${string}`;
   authResult: AuthState;
 }
 
@@ -37,14 +39,13 @@ const MiniAppContext = React.createContext<MiniAppContextType | undefined>(
 );
 
 export function MiniAppProvider({ children }: { children: React.ReactNode }) {
-  const [wallet, setWallet] = React.useState<string | undefined>(undefined);
   const [authResult, setAuthResult] = React.useState<AuthState>({
     type: "loading",
   });
 
   const handleAuthentication = React.useCallback(async () => {
     setAuthResult({ type: "loading" });
-    const result = await authenticate();
+    const result = await authenticate({ chainId: baseSepolia.id });
 
     if (result.result === TransactionResult.FAILED) {
       setAuthResult({
@@ -58,21 +59,23 @@ export function MiniAppProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    if (result.result === TransactionResult.CANCELED) {
+    if (result.result === TransactionResult.CANCELLED) {
       setAuthResult({ type: "canceled" });
 
       return;
     }
 
-    if (result.result === TransactionResult.SUCCESS) {
-      setWallet(result.data.wallet);
-      setAuthResult({
-        type: "success",
-        wallet: result.data.wallet,
-        signature: result.data.signature,
-        message: result.data.message,
-      });
-    }
+    const { data: nonceData, error: nonceError } = await authClient.siwe.nonce({
+      walletAddress: result.data.wallet,
+      chainId: baseSepolia.id,
+    });
+
+    setAuthResult({
+      type: "success",
+      wallet: result.data.wallet,
+      signature: result.data.signature,
+      message: result.data.message,
+    });
   }, []);
 
   React.useEffect(() => {
@@ -87,7 +90,15 @@ export function MiniAppProvider({ children }: { children: React.ReactNode }) {
     );
   }
 
-  return (
-    <MiniAppContext value={{ wallet, authResult }}>{children}</MiniAppContext>
-  );
+  return <MiniAppContext value={{ authResult }}>{children}</MiniAppContext>;
+}
+
+export function useMiniApp() {
+  const context = React.use(MiniAppContext);
+
+  if (!context) {
+    throw new Error("useMiniApp must be used within a MiniAppProvider");
+  }
+
+  return context;
 }
