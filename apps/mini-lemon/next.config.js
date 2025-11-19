@@ -9,6 +9,16 @@ await jiti.import("./src/env");
 const nextConfig = {
   transpilePackages: ["@mint-up/ui"],
 
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "enchanted-crab-646.convex.cloud",
+        pathname: "/api/storage/**",
+      },
+    ],
+  },
+
   typedRoutes: true,
   typescript: { ignoreBuildErrors: true },
 
