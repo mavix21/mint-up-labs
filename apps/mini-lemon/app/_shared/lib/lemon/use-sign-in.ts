@@ -11,26 +11,26 @@ import {
   useSession,
 } from "next-auth/react";
 
-type AuthState =
-  | {
-      type: "success";
-      wallet: Address;
-      signature: Hex;
-      message: string;
-    }
-  | {
-      type: "error";
-      error: {
-        message: string;
-        code: string;
-      };
-    }
-  | {
-      type: "canceled";
-    }
-  | {
-      type: "loading";
-    };
+// type AuthState =
+//   | {
+//       type: "success";
+//       wallet: Address;
+//       signature: Hex;
+//       message: string;
+//     }
+//   | {
+//       type: "error";
+//       error: {
+//         message: string;
+//         code: string;
+//       };
+//     }
+//   | {
+//       type: "canceled";
+//     }
+//   | {
+//       type: "loading";
+//     };
 
 export const useSignIn = () => {
   const { data: session, status } = useSession();
