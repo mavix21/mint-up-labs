@@ -22,10 +22,10 @@ export default function CollectionPage() {
           <h2 className="text-foreground border-primary -mb-2.5 border-b-2 px-1 pb-2 text-lg font-semibold">
             NFTs
           </h2>
-          <h2 className="text-muted-foreground px-1 pb-2 text-lg font-medium">
+          <h2 className="text-muted-foreground px-1 text-lg font-medium">
             Tokens
           </h2>
-          <h2 className="text-muted-foreground px-1 pb-2 text-lg font-medium">
+          <h2 className="text-muted-foreground px-1 text-lg font-medium">
             Activity
           </h2>
         </div>
