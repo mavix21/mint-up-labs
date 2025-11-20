@@ -61,12 +61,12 @@ export default async function RootLayout({
                 >
                   <AppHeader />
                   <div>{children}</div>
+                  <BottomNav />
                 </ThemeProvider>
               </MiniAppProvider>
             </WagmiClientProvider>
           </ConvexClientProvider>
         </AuthKitProvider>
-        <BottomNav />
       </body>
     </html>
   );
