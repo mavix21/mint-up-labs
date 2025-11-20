@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calendar, CardSim, Search, Users } from "lucide-react";
+import { Calendar, Search, Users, Wallet } from "lucide-react";
 
 import { Button } from "@mint-up/ui/components/button";
 import { cn } from "@mint-up/ui/lib/utils";
@@ -28,7 +28,7 @@ export function BottomNav() {
     },
     {
       id: "collection",
-      icon: CardSim,
+      icon: Wallet,
       label: "Colección",
       href: "/collection" as const,
     },
