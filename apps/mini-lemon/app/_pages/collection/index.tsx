@@ -1,4 +1,4 @@
-import { mockNFTs, mockWallet } from "./models/mock-data";
+import { mockNFTs } from "./models/mock-data";
 import { ActionButtons } from "./ui/action-buttons";
 import { NFTGrid } from "./ui/nft-grid";
 import { WalletHeader } from "./ui/wallet-header";
@@ -9,7 +9,7 @@ export default function CollectionPage() {
       {/* Header Section */}
       <div className="flex flex-col gap-6">
         <div className="flex items-start justify-between">
-          <WalletHeader balance={mockWallet.balanceUSDC} />
+          <WalletHeader />
           {/* Settings icon could go here if needed, matching the design */}
         </div>
 
