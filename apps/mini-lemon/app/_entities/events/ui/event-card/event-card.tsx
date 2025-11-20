@@ -145,6 +145,7 @@ const EventCardImage = React.forwardRef<HTMLDivElement, EventCardImageProps>(
             src={src ?? "/placeholder.svg"}
             alt={alt ?? "Event image"}
             fill
+            sizes="80px"
             className="object-cover"
           />
         </div>
