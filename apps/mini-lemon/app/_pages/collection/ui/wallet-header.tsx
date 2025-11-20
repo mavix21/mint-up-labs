@@ -1,10 +1,11 @@
 "use client";
 
-import { Copy } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 
 import { Skeleton } from "@mint-up/ui/components/skeleton";
 import { cn } from "@mint-up/ui/lib/utils";
 
+import { useCopyToClipboard } from "@/app/_shared/hooks/use-copy-to-clipboard";
 import { useUSDCBalance } from "@/app/_shared/hooks/use-usdc-balance";
 import { useMiniApp } from "@/app/_shared/lib/lemon/mini-app.provider";
 
@@ -15,6 +16,7 @@ interface WalletHeaderProps {
 export function WalletHeader({ className }: WalletHeaderProps) {
   const { wallet } = useMiniApp();
   const { formatted, isLoading } = useUSDCBalance();
+  const [copiedText, copyToClipboard] = useCopyToClipboard();
 
   return (
     <div className={cn("flex flex-col gap-2", className)}>
@@ -24,7 +26,14 @@ export function WalletHeader({ className }: WalletHeaderProps) {
             ? `${wallet.slice(0, 7)}...${wallet.slice(-5)}`
             : "0x00000...00000"}
         </span>
-        <Copy className="hover:text-foreground h-3 w-3 cursor-pointer transition-colors" />
+        {copiedText ? (
+          <Check className="h-3 w-3 text-green-500 transition-all" />
+        ) : (
+          <Copy
+            className="hover:text-foreground h-3 w-3 cursor-pointer transition-colors"
+            onClick={() => wallet && copyToClipboard(wallet)}
+          />
+        )}
       </div>
       <div className="flex items-baseline gap-1">
         {isLoading ? (
