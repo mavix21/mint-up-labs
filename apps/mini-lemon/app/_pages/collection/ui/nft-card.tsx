@@ -39,6 +39,7 @@ function NFTCardImage({ src, alt, className, ...props }: NFTCardImageProps) {
         src={src}
         alt={alt}
         fill
+        sizes="50vw"
         className={cn(
           "object-cover transition-transform duration-300 group-hover:scale-105",
           className,
