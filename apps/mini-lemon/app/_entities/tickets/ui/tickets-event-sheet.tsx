@@ -15,6 +15,10 @@ import {
   DrawerTitle,
 } from "@mint-up/ui/components/drawer";
 
+import {
+  MINTUP_FACTORY_CONTRACT_ADDRESS,
+  USDC_CONTRACT_ADDRESS,
+} from "@/app/_shared/lib/constants";
 import { useMiniApp } from "@/app/_shared/lib/lemon/mini-app.provider";
 
 import { usePendingRegistrationService } from "../models/pending-registration.service";
@@ -26,12 +30,6 @@ import {
 import { EventIntentionsSheet } from "./EventIntentionsSheet";
 import { FreeTicketCard } from "./FreeTicketCard";
 import { PaidTicketCard } from "./PaidTicketCard";
-
-// Constants
-const USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
-// TODO: Ensure this environment variable is set or import from constants file
-const MINTUP_FACTORY_CONTRACT_ADDRESS =
-  "0x5Bf66d335822BEAD0848AaA92A15fe842b554871" as `0x${string}`; // Placeholder until env is fixed
 
 export interface TicketsEventSheetProps {
   open: boolean;
@@ -117,7 +115,7 @@ const TicketsEventSheet = ({
         const response = await callSmartContract({
           contracts: [
             {
-              contractAddress: USDC_ADDRESS,
+              contractAddress: USDC_CONTRACT_ADDRESS,
               functionName: "approve",
               functionParams: [
                 MINTUP_FACTORY_CONTRACT_ADDRESS,
