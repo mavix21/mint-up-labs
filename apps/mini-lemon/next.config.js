@@ -16,6 +16,11 @@ const nextConfig = {
         hostname: "enchanted-crab-646.convex.cloud",
         pathname: "/api/storage/**",
       },
+      {
+        protocol: "https",
+        hostname: "hearty-grasshopper-438.convex.cloud",
+        pathname: "/api/storage/**",
+      },
     ],
   },
 
