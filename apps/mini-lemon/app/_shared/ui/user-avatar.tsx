@@ -17,7 +17,6 @@ interface UserAvatarProps {
 export function UserAvatar({
   username = "marcevizcarra",
   avatarUrl = "/lemmy.png",
-  displayName,
 }: UserAvatarProps) {
   return (
     <div className="bg-card flex items-center gap-3 rounded-lg px-3 py-1.5">
