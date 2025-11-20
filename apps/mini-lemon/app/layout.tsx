@@ -4,13 +4,18 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@mint-up/ui/globals.css";
 import "@farcaster/auth-kit/styles.css";
 
+import { headers } from "next/headers";
+import { cookieToInitialState } from "wagmi";
+
 import { getSession } from "@/auth";
 
 import { MiniAppProvider } from "./_shared/lib/lemon";
+import { getConfig } from "./_shared/lib/wagmi";
 import { AppHeader } from "./_shared/ui/layout/app-header";
 import { BottomNav } from "./_shared/ui/layout/bottom-nav";
 import { ConvexClientProvider } from "./_shared/ui/providers";
 import { AuthKitProvider } from "./_shared/ui/providers/auth-kit-client.provider";
+import { WagmiClientProvider } from "./_shared/ui/providers/wagmi.provider";
 import { ThemeProvider } from "./_shared/ui/theme-provider";
 
 const geistSans = Geist({
@@ -34,6 +39,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getSession();
+  const initialState = cookieToInitialState(
+    getConfig(),
+    (await headers()).get("cookie"),
+  );
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -42,18 +51,20 @@ export default async function RootLayout({
       >
         <AuthKitProvider>
           <ConvexClientProvider session={session}>
-            <MiniAppProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="dark"
-                enableSystem
-                disableTransitionOnChange
-              >
-                <AppHeader />
-                <div>{children}</div>
-                <BottomNav />
-              </ThemeProvider>
-            </MiniAppProvider>
+            <WagmiClientProvider initialState={initialState}>
+              <MiniAppProvider>
+                <ThemeProvider
+                  attribute="class"
+                  defaultTheme="dark"
+                  enableSystem
+                  disableTransitionOnChange
+                >
+                  <AppHeader />
+                  <div>{children}</div>
+                  <BottomNav />
+                </ThemeProvider>
+              </MiniAppProvider>
+            </WagmiClientProvider>
           </ConvexClientProvider>
         </AuthKitProvider>
       </body>
