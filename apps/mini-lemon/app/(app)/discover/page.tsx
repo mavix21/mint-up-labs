@@ -45,7 +45,10 @@ export default function DiscoverPage() {
         />
       </div>
 
-      <div className="scrollbar-hide -mx-4 flex gap-2 overflow-x-auto px-4">
+      <div
+        className="-mx-4 flex gap-2 overflow-x-auto px-4"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
         {CATEGORIES.map((category) => (
           <Badge
             key={category}
