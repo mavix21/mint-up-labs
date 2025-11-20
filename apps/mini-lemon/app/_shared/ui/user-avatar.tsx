@@ -20,8 +20,8 @@ export function UserAvatar({
   displayName,
 }: UserAvatarProps) {
   return (
-    <div className="bg-card flex items-center gap-3 rounded-lg px-2.5 py-1.5">
-      <Avatar className="size-10">
+    <div className="bg-card flex items-center gap-3 rounded-lg px-3 py-1.5">
+      <Avatar className="size-8">
         <AvatarImage src={avatarUrl} alt={username} />
         <AvatarFallback className="bg-primary/10">
           <User className="text-primary h-5 w-5" />
