@@ -1,29 +1,53 @@
-# [Project Name]
+# Mint Up Labs
 
-Project description
+Mint Up Labs is a comprehensive event management and ticketing platform built as a monorepo. The flagship application is **Mini Lemon**, a Mini App designed to run seamlessly within the Lemon Cash ecosystem.
+
+## 🍋 Mini Lemon App
+
+The **Mini Lemon** app (`apps/mini-lemon`) is a specialized experience integrated into the Lemon Cash wallet. It leverages Web3 technology to provide a secure and transparent ticketing solution on the Base Sepolia network.
+
+### Key Features
+
+- **Smart Wallet Integration**:
+  - Creates a unique wallet for each Mini App using **ERC-6492**.
+  - Users can easily **deposit** funds from their main Lemon wallet to the Mini App wallet.
+  - Supports **withdrawals** back to the main wallet.
+- **Event Discovery**: Users can browse and search for events across various categories such as Music, Business, Arts, and Tech.
+- **Smart Ticketing**:
+  - Support for both **Free** and **Paid** tickets.
+  - Paid tickets are purchased using **USDC** on Base Sepolia.
+  - Tickets are issued as NFTs, ensuring true ownership and verifiability.
+- **My Events**: A dedicated section for users to view and manage their purchased tickets and upcoming events.
+- **Digital Collection**: Users can view their collected NFTs and tokens directly within the app.
+- **Event Creation**: Organizers can easily create and publish events:
+  - **Online Events**: With link integration.
+  - **In-Person Events**: With location details and instructions.
 
 ## 📦 Monorepo Structure
 
-This repository is a pnpm monorepo. It consists of the following main parts:
+This repository is a pnpm monorepo managed with Turbo. It consists of the following main parts:
 
-- `apps/web`: This is the main Next.js application. It contains all the user-facing pages, API routes, and application-specific logic.
-- `packages/ui`: This package holds all the shared UI components, primarily built using shadcn/ui. These components are designed to be reusable across different parts of the application or even other applications within the monorepo in the future
-- `packages/contracts`: This package contains the hardhat project for the smart contracts.
-- `tooling/`: This directory contains configuration files for common development tools like ESLint, Prettier, TypeScript, etc., ensuring consistent code quality and development experience across the monorepo.
+- `apps/mini-lemon`: The main Lemon Cash Mini App.
+- `apps/web`: The web-based interface for the platform (Next.js).
+- `packages/convex`: Backend logic, database schemas, and API functions powered by Convex.
+- `packages/ui`: Shared UI component library based on shadcn/ui.
+- `packages/s-contracts`: Smart contracts (Hardhat) for ticketing and event management.
+- `tooling/`: Shared configurations for ESLint, Prettier, and TypeScript.
 
 ## 🧰 Tech Stack
 
-- **Next.js 15 & Turbopack:** Modern, fast, and scalable React framework for the frontend.
+- **Next.js 16 & Turbopack:** Modern, fast, and scalable React framework for the frontend.
 
 - **Blockchain Integration (Web3):**
-
-  - Utilizes OnchainKit, Wagmi, and Viem for connecting to and interacting with EVM-compatible blockchains.
-  - Interacts with smart contracts deployed via the Hardhat project in `packages/contracts`.
-  - Supports "Sign-In with Ethereum" (SIWE) via `@reown/appkit-siwe`.
+  - **Network**: Base Sepolia.
+  - **Mini App SDK**: Utilizes `@lemoncash/mini-app-sdk` for integration with the Lemon ecosystem.
+  - **Smart Wallets**: Implements ERC-6492 for app-specific wallet creation.
+  - **Libraries**: Uses Wagmi and Viem for connecting to and interacting with EVM-compatible blockchains.
+  - **Contracts**: Interacts with smart contracts deployed via the Hardhat project in `packages/s-contracts`.
 
 - **Convex Backend:** Reactive backend-as-a-service for data storage, server functions, and real-time updates.
 
-- **User Authentication:** Robust authentication system using NextAuth.js (`@auth/core`, `next-auth`).
+- **User Authentication:** Robust authentication system using NextAuth.js (`@auth/core`, `next-auth`) and Farcaster Auth Kit.
 
 - **Rich Text Editing:** Includes a Tiptap-based rich text editor for content creation.
 
@@ -38,49 +62,3 @@ This repository is a pnpm monorepo. It consists of the following main parts:
 - **Server State Management:** Uses `@tanstack/react-query` for managing server state and caching.
 
 - **Modern Tooling:** Includes ESLint, Prettier, TypeScript for code quality and development experience.
-
-- ...and more!
-
-## 🚀 Getting Started
-
-Follow these instructions to get the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-- Node.js (version specified in `.nvmrc` - make sure to use a Node version manager like nvm or fnm)
-- pnpm (version specified in `package.json` under `packageManager`)
-
-### Installation
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone *repo-url*
-    cd mint-up
-    ```
-
-2.  **Install dependencies:**
-    This project uses pnpm workspaces. Install all dependencies from the root of the monorepo:
-    ```bash
-    pnpm install
-    ```
-
-### Environment Variables
-
-The Next.js application in `apps/web` requires some environment variables to run correctly.
-
-1.  Create a `.env.local` file by copying the example environment file
-
-    ```bash
-    cp .env.example .env.local
-    ```
-
-### Running the Development Server
-
-1.  To start the development server for the Next.js web application from the root:
-
-    ```bash
-    pnpm dev
-    ```
-
-    The application should now be running on [http://localhost:3000](http://localhost:3000) (or the port specified in your Next.js configuration).
