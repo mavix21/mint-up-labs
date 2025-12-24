@@ -13,13 +13,13 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
   // Package Generator (existing)
   // ============================================
   plop.setGenerator("init", {
-    description: "Generate a new package for the myapp Monorepo",
+    description: "Generate a new package for the mint-up Monorepo",
     prompts: [
       {
         type: "input",
         name: "name",
         message:
-          "What is the name of the package? (You can skip the `@myapp/` prefix)",
+          "What is the name of the package? (You can skip the `@mint-up/` prefix)",
       },
       {
         type: "input",
@@ -31,8 +31,8 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
     actions: [
       (answers) => {
         if ("name" in answers && typeof answers.name === "string") {
-          if (answers.name.startsWith("@myapp/")) {
-            answers.name = answers.name.replace("@myapp/", "");
+          if (answers.name.startsWith("@mint-up/")) {
+            answers.name = answers.name.replace("@mint-up/", "");
           }
         }
         return "Config sanitized";
@@ -100,7 +100,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
   // Feature Generator (FSD)
   // ============================================
   plop.setGenerator("feature", {
-    description: "Generate a new feature slice in @myapp/features",
+    description: "Generate a new feature slice in @mint-up/features",
     prompts: [
       {
         type: "input",
@@ -145,7 +145,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
   // Entity Generator (FSD)
   // ============================================
   plop.setGenerator("entity", {
-    description: "Generate a new entity slice in @myapp/features",
+    description: "Generate a new entity slice in @mint-up/features",
     prompts: [
       {
         type: "input",
@@ -184,7 +184,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
   // Widget Generator (FSD)
   // ============================================
   plop.setGenerator("widget", {
-    description: "Generate a new widget slice in @myapp/features",
+    description: "Generate a new widget slice in @mint-up/features",
     prompts: [
       {
         type: "input",
@@ -219,7 +219,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
   // Page Generator (FSD - Shared)
   // ============================================
   plop.setGenerator("page", {
-    description: "Generate a new shared page in @myapp/features",
+    description: "Generate a new shared page in @mint-up/features",
     prompts: [
       {
         type: "input",

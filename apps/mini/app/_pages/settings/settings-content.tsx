@@ -16,11 +16,11 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@myapp/ui/components/avatar";
-import { Badge } from "@myapp/ui/components/badge";
-import { Button } from "@myapp/ui/components/button";
-import { Card, CardContent } from "@myapp/ui/components/card";
-import { Skeleton } from "@myapp/ui/components/skeleton";
+} from "@mint-up/ui/components/avatar";
+import { Badge } from "@mint-up/ui/components/badge";
+import { Button } from "@mint-up/ui/components/button";
+import { Card, CardContent } from "@mint-up/ui/components/card";
+import { Skeleton } from "@mint-up/ui/components/skeleton";
 
 import { useAuth } from "@/shared/context/auth-context";
 import { useAddMiniApp, useMiniApp } from "@/shared/context/miniapp-context";

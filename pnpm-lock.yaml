@@ -76,7 +76,7 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.7.0
         version: 4.7.0(prettier@3.7.3)
-      '@myapp/prettier-config':
+      '@mint-up/prettier-config':
         specifier: workspace:*
         version: link:tooling/prettier
       '@turbo/gen':
@@ -161,16 +161,16 @@ importers:
       '@babel/core':
         specifier: ^7.20.0
         version: 7.28.5
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/prettier-config':
+      '@mint-up/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@myapp/tailwind-config':
+      '@mint-up/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@tailwindcss/postcss':
@@ -209,19 +209,19 @@ importers:
       '@lemoncash/mini-app-sdk':
         specifier: ^0.1.11
         version: 0.1.11
-      '@myapp/auth':
+      '@mint-up/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@myapp/better-auth-siwe-wallet-agnostic':
+      '@mint-up/better-auth-siwe-wallet-agnostic':
         specifier: workspace:*
         version: link:../../packages/better-auth-siwe-wallet-agnostic
-      '@myapp/convex':
+      '@mint-up/convex':
         specifier: workspace:*
         version: link:../../packages/convex
-      '@myapp/features':
+      '@mint-up/features':
         specifier: workspace:*
         version: link:../../packages/features
-      '@myapp/ui':
+      '@mint-up/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@silk-hq/components':
@@ -291,10 +291,10 @@ importers:
         specifier: 'catalog:'
         version: 4.1.13
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
@@ -333,16 +333,16 @@ importers:
       '@farcaster/miniapp-sdk':
         specifier: ^0.2.1
         version: 0.2.1(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
-      '@myapp/auth':
+      '@mint-up/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@myapp/convex':
+      '@mint-up/convex':
         specifier: workspace:*
         version: link:../../packages/convex
-      '@myapp/features':
+      '@mint-up/features':
         specifier: workspace:*
         version: link:../../packages/features
-      '@myapp/ui':
+      '@mint-up/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@silk-hq/components':
@@ -412,10 +412,10 @@ importers:
         specifier: 'catalog:'
         version: 4.1.13
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
@@ -451,19 +451,19 @@ importers:
       '@convex-dev/better-auth':
         specifier: ^0.10.6
         version: 0.10.6(@better-auth/core@1.4.7(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.21)(better-call@1.1.5(zod@4.1.13))(jose@6.1.2)(kysely@0.28.8)(nanostores@1.1.0))(@better-auth/utils@0.3.0)(@standard-schema/spec@1.0.0)(better-auth@1.4.7(@prisma/client@5.22.0(prisma@5.22.0))(better-sqlite3@12.5.0)(drizzle-kit@0.31.8)(next@16.1.0(@babel/core@7.28.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(pg@8.16.3)(prisma@5.22.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(better-call@1.1.5(zod@4.1.13))(convex@1.31.2(react@19.2.3))(hono@4.10.7)(nanostores@1.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
-      '@myapp/better-auth-siwe-wallet-agnostic':
+      '@mint-up/better-auth-siwe-wallet-agnostic':
         specifier: workspace:*
         version: link:../../packages/better-auth-siwe-wallet-agnostic
-      '@myapp/convex':
+      '@mint-up/convex':
         specifier: workspace:*
         version: link:../../packages/convex
-      '@myapp/db':
+      '@mint-up/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@myapp/features':
+      '@mint-up/features':
         specifier: workspace:*
         version: link:../../packages/features
-      '@myapp/ui':
+      '@mint-up/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@radix-ui/react-label':
@@ -530,10 +530,10 @@ importers:
         specifier: 'catalog:'
         version: 4.1.13
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
@@ -557,10 +557,10 @@ importers:
 
   packages/auth:
     dependencies:
-      '@myapp/better-auth-siwe-wallet-agnostic':
+      '@mint-up/better-auth-siwe-wallet-agnostic':
         specifier: workspace:*
         version: link:../better-auth-siwe-wallet-agnostic
-      '@myapp/db':
+      '@mint-up/db':
         specifier: workspace:*
         version: link:../db
       '@t3-oss/env-core':
@@ -582,13 +582,13 @@ importers:
       '@better-auth/cli':
         specifier: 'catalog:'
         version: 1.4.7(@better-fetch/fetch@1.1.21)(@neondatabase/serverless@0.9.5)(@types/better-sqlite3@7.6.13)(@types/react@19.2.7)(@vercel/postgres@0.10.0(utf-8-validate@5.0.10))(better-call@1.1.5(zod@4.1.13))(drizzle-kit@0.31.8)(jose@6.1.2)(kysely@0.28.8)(nanostores@1.1.0)(next@16.1.0(@babel/core@7.28.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(postgres@3.4.7)(prisma@5.22.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/prettier-config':
+      '@mint-up/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -616,13 +616,13 @@ importers:
         specifier: 'catalog:'
         version: 4.1.13
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/prettier-config':
+      '@mint-up/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -640,7 +640,7 @@ importers:
       '@convex-dev/better-auth':
         specifier: ^0.10.6
         version: 0.10.6(@better-auth/core@1.4.7(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.21)(better-call@1.1.5(zod@4.1.13))(jose@6.1.2)(kysely@0.28.8)(nanostores@1.1.0))(@better-auth/utils@0.3.0)(@standard-schema/spec@1.0.0)(better-auth@1.4.7(@prisma/client@5.22.0(prisma@5.22.0))(better-sqlite3@12.5.0)(drizzle-kit@0.31.8)(next@16.1.0(@babel/core@7.28.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(pg@8.16.3)(prisma@5.22.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(better-call@1.1.5(zod@4.1.13))(convex@1.31.2(react@19.2.3))(hono@4.10.7)(nanostores@1.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
-      '@myapp/auth':
+      '@mint-up/auth':
         specifier: workspace:*
         version: link:../auth
       '@neynar/nodejs-sdk':
@@ -699,13 +699,13 @@ importers:
         specifier: 'catalog:'
         version: 4.1.13
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/prettier-config':
+      '@mint-up/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
@@ -733,16 +733,16 @@ importers:
         specifier: 'catalog:'
         version: 4.1.17
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/prettier-config':
+      '@mint-up/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@myapp/tailwind-config':
+      '@mint-up/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/react':
@@ -772,10 +772,10 @@ importers:
 
   packages/s-contracts:
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@nomicfoundation/hardhat-ignition':
@@ -923,13 +923,13 @@ importers:
         specifier: 'catalog:'
         version: 4.1.13
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@myapp/tailwind-config':
+      '@mint-up/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
@@ -1008,10 +1008,10 @@ importers:
         specifier: 'catalog:'
         version: 8.50.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
     devDependencies:
-      '@myapp/prettier-config':
+      '@mint-up/prettier-config':
         specifier: workspace:*
         version: link:../prettier
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
@@ -1041,7 +1041,7 @@ importers:
         specifier: 'catalog:'
         version: 0.7.1(@ianvs/prettier-plugin-sort-imports@4.7.0(prettier@3.7.3))(prettier@3.7.3)
     devDependencies:
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
@@ -1063,13 +1063,13 @@ importers:
         specifier: 'catalog:'
         version: 4.1.17
     devDependencies:
-      '@myapp/eslint-config':
+      '@mint-up/eslint-config':
         specifier: workspace:*
         version: link:../eslint
-      '@myapp/prettier-config':
+      '@mint-up/prettier-config':
         specifier: workspace:*
         version: link:../prettier
-      '@myapp/tsconfig':
+      '@mint-up/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':

@@ -30,7 +30,7 @@ export const env = createEnv({
     NEXT_PUBLIC_ONCHAINKIT_PROJECT_ID: z.string().optional(),
     NEXT_PUBLIC_CONVEX_URL: z.url(),
     NEXT_PUBLIC_CONVEX_SITE_URL: z.url(),
-    NEXT_PUBLIC_APPLICATION_NAME: z.string().default("MyApp"),
+    NEXT_PUBLIC_APPLICATION_NAME: z.string().default("mint-up"),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.

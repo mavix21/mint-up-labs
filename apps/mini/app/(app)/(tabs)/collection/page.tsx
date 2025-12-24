@@ -7,22 +7,22 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@myapp/ui/components/avatar";
-import { Badge } from "@myapp/ui/components/badge";
-import { Button } from "@myapp/ui/components/button";
+} from "@mint-up/ui/components/avatar";
+import { Badge } from "@mint-up/ui/components/badge";
+import { Button } from "@mint-up/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@myapp/ui/components/card";
+} from "@mint-up/ui/components/card";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@myapp/ui/components/tabs";
+} from "@mint-up/ui/components/tabs";
 
 interface CollectionItem {
   id: string;

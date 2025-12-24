@@ -8,6 +8,6 @@
 export type { SupportedLocale } from "./types";
 
 // Common messages are available at:
-// @myapp/features/shared/i18n/messages/en.json
-// @myapp/features/shared/i18n/messages/es.json
+// @mint-up/features/shared/i18n/messages/en.json
+// @mint-up/features/shared/i18n/messages/es.json
 // Apps should import and merge these with their app-specific messages

@@ -19,17 +19,17 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@myapp/ui/components/avatar";
-import { Button } from "@myapp/ui/components/button";
+} from "@mint-up/ui/components/avatar";
+import { Button } from "@mint-up/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@myapp/ui/components/card";
-import { CardSheet } from "@myapp/ui/components/card-sheet/index";
-import { Skeleton } from "@myapp/ui/components/skeleton";
+} from "@mint-up/ui/components/card";
+import { CardSheet } from "@mint-up/ui/components/card-sheet/index";
+import { Skeleton } from "@mint-up/ui/components/skeleton";
 
 import { useAuth } from "@/shared/context/auth-context";
 import { useMiniApp } from "@/shared/context/miniapp-context";

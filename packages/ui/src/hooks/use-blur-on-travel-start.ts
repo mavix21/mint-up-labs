@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { blurActiveElement } from "@myapp/ui/lib/utils";
+import { blurActiveElement } from "@mint-up/ui/lib/utils";
 
 /**
  * Hook that wraps an onTravelStart callback to blur the active element first.

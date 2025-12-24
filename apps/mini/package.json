@@ -20,10 +20,10 @@
     "@farcaster/miniapp-core": "^0.4.1",
     "@farcaster/miniapp-node": "^0.1.11",
     "@farcaster/miniapp-sdk": "^0.2.1",
-    "@myapp/auth": "workspace:*",
-    "@myapp/convex": "workspace:*",
-    "@myapp/features": "workspace:*",
-    "@myapp/ui": "workspace:*",
+    "@mint-up/auth": "workspace:*",
+    "@mint-up/convex": "workspace:*",
+    "@mint-up/features": "workspace:*",
+    "@mint-up/ui": "workspace:*",
     "@silk-hq/components": "^0.10.0",
     "@t3-oss/env-nextjs": "^0.13.10",
     "@tailwindcss/postcss": "catalog:",
@@ -48,8 +48,8 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@myapp/eslint-config": "workspace:*",
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
@@ -57,5 +57,5 @@
     "jiti": "^2.6.1",
     "typescript": "catalog:"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

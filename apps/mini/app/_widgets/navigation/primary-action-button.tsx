@@ -3,8 +3,8 @@
 import type { Route } from "next";
 import { Plus } from "lucide-react";
 
-import { Button } from "@myapp/ui/components/button";
-import { cn } from "@myapp/ui/lib/utils";
+import { Button } from "@mint-up/ui/components/button";
+import { cn } from "@mint-up/ui/lib/utils";
 
 import { SheetLink } from "@/shared/ui/sheet-link";
 

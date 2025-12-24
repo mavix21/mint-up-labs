@@ -1,4 +1,4 @@
-# @myapp/features
+# @mint-up/features
 
 A Feature Sliced Design (FSD) package for shared domain-specific components across the monorepo.
 
@@ -6,10 +6,10 @@ A Feature Sliced Design (FSD) package for shared domain-specific components acro
 
 This package follows the [Feature Sliced Design](https://feature-sliced.design) methodology to organize shared code that can be used across all apps (web, mini, lemon, expo).
 
-**Key distinction from `@myapp/ui`:**
+**Key distinction from `@mint-up/ui`:**
 
-- `@myapp/ui` → Domain-agnostic design system components (Button, Card, Input, etc.)
-- `@myapp/features` → Domain-specific features, widgets, and entities (UserCard, ConnectWallet, etc.)
+- `@mint-up/ui` → Domain-agnostic design system components (Button, Card, Input, etc.)
+- `@mint-up/features` → Domain-specific features, widgets, and entities (UserCard, ConnectWallet, etc.)
 
 ## Layer Structure
 
@@ -49,20 +49,20 @@ Each slice (feature, entity, widget) uses **purpose-based** segments:
 
 ```tsx
 // App-level providers
-import type { User } from "@myapp/features/entities/user";
-import type { WalletState } from "@myapp/features/features/connect-wallet";
-import { ThemeProvider } from "@myapp/features/app/providers";
-import { UserAvatar } from "@myapp/features/entities/user";
+import type { User } from "@mint-up/features/entities/user";
+import type { WalletState } from "@mint-up/features/features/connect-wallet";
+import { ThemeProvider } from "@mint-up/features/app/providers";
+import { UserAvatar } from "@mint-up/features/entities/user";
 import {
   ConnectWalletButton,
   truncateAddress,
-} from "@myapp/features/features/connect-wallet";
-import { constants, featureFlags } from "@myapp/features/shared/config";
-import { defaultLocale, isValidLocale } from "@myapp/features/shared/i18n";
+} from "@mint-up/features/features/connect-wallet";
+import { constants, featureFlags } from "@mint-up/features/shared/config";
+import { defaultLocale, isValidLocale } from "@mint-up/features/shared/i18n";
 // Shared utilities
-import { invariant, isDefined } from "@myapp/features/shared/lib";
+import { invariant, isDefined } from "@mint-up/features/shared/lib";
 // Widgets
-import { UserCard } from "@myapp/features/widgets/user-card";
+import { UserCard } from "@mint-up/features/widgets/user-card";
 
 // Features
 
@@ -76,7 +76,7 @@ import { UserCard } from "@myapp/features/widgets/user-card";
 ```json
 {
   "dependencies": {
-    "@myapp/features": "workspace:*"
+    "@mint-up/features": "workspace:*"
   }
 }
 ```
@@ -85,7 +85,7 @@ import { UserCard } from "@myapp/features/widgets/user-card";
 
 ```tsx
 // In your app's layout or providers
-import { ThemeProvider } from "@myapp/features/app/providers";
+import { ThemeProvider } from "@mint-up/features/app/providers";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

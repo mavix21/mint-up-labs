@@ -1,5 +1,5 @@
 {
-  "name": "@myapp/features",
+  "name": "@mint-up/features",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -30,10 +30,10 @@
     "tailwindcss": "catalog:"
   },
   "devDependencies": {
-    "@myapp/eslint-config": "workspace:*",
-    "@myapp/prettier-config": "workspace:*",
-    "@myapp/tailwind-config": "workspace:*",
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/prettier-config": "workspace:*",
+    "@mint-up/tailwind-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
     "eslint": "catalog:",
@@ -46,5 +46,5 @@
   "peerDependencies": {
     "react": "catalog:react19"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

@@ -2,7 +2,7 @@ import { createClient, GenericCtx } from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
 import { betterAuth, BetterAuthOptions } from "better-auth";
 
-import { betterAuthOptions } from "@myapp/auth";
+import { betterAuthOptions } from "@mint-up/auth";
 
 import { components } from "./_generated/api";
 import { DataModel } from "./_generated/dataModel";

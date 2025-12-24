@@ -28,9 +28,9 @@ export interface WalletStatusProps {
  *
  * @example
  * ```tsx
- * import { WalletStatus } from "@myapp/features/features/connect-wallet";
+ * import { WalletStatus } from "@mint-up/features/features/connect-wallet";
  * import { useAccount } from "wagmi";
- * import { truncateAddress } from "@myapp/features/features/connect-wallet";
+ * import { truncateAddress } from "@mint-up/features/features/connect-wallet";
  *
  * function MyWalletStatus() {
  *   const { address, isConnected } = useAccount();

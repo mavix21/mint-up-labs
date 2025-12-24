@@ -28,11 +28,11 @@ export interface UserAvatarProps {
  * UserAvatar - Displays a user's avatar with fallback.
  *
  * A simple avatar component that can be styled with your design system.
- * For production, consider using the Avatar component from @myapp/ui.
+ * For production, consider using the Avatar component from @mint-up/ui.
  *
  * @example
  * ```tsx
- * import { UserAvatar } from "@myapp/features/entities/user";
+ * import { UserAvatar } from "@mint-up/features/entities/user";
  *
  * function MyComponent() {
  *   return (

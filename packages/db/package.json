@@ -1,5 +1,5 @@
 {
-  "name": "@myapp/db",
+  "name": "@mint-up/db",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -43,14 +43,14 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@myapp/eslint-config": "workspace:*",
-    "@myapp/prettier-config": "workspace:*",
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/prettier-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "drizzle-kit": "^0.31.8",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

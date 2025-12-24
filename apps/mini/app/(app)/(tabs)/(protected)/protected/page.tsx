@@ -3,15 +3,15 @@
 import Image from "next/image";
 import { useAccount, useChainId } from "wagmi";
 
-import { Badge } from "@myapp/ui/components/badge";
+import { Badge } from "@mint-up/ui/components/badge";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@myapp/ui/components/card";
-import { Separator } from "@myapp/ui/components/separator";
+} from "@mint-up/ui/components/card";
+import { Separator } from "@mint-up/ui/components/separator";
 
 import { authClient } from "@/auth/client";
 import { useAuth } from "@/shared/context/auth-context";

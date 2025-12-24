@@ -4,7 +4,7 @@ import type { Route } from "next";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 
-import { BottomSheet } from "@myapp/ui/components/bottom-sheet/index";
+import { BottomSheet } from "@mint-up/ui/components/bottom-sheet/index";
 
 import { useSheetRoute } from "@/shared/hooks/use-sheet-route";
 

@@ -4,10 +4,10 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@myapp/ui/components/avatar";
-import { Badge } from "@myapp/ui/components/badge";
-import { Button } from "@myapp/ui/components/button";
-import { Separator } from "@myapp/ui/components/separator";
+} from "@mint-up/ui/components/avatar";
+import { Badge } from "@mint-up/ui/components/badge";
+import { Button } from "@mint-up/ui/components/button";
+import { Separator } from "@mint-up/ui/components/separator";
 
 interface ArticleContentProps {
   dismissButton?: React.ReactNode;

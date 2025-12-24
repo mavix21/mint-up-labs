@@ -1,5 +1,5 @@
 /**
- * @myapp/features
+ * @mint-up/features
  *
  * Feature Sliced Design (FSD) package for shared domain-specific components.
  * This package follows the FSD methodology: https://feature-sliced.design

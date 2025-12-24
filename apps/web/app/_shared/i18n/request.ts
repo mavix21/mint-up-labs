@@ -1,9 +1,9 @@
 import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 
-// Shared common messages from @myapp/features
-import commonEn from "@myapp/features/shared/i18n/messages/en";
-import commonEs from "@myapp/features/shared/i18n/messages/es";
+// Shared common messages from @mint-up/features
+import commonEn from "@mint-up/features/shared/i18n/messages/en";
+import commonEs from "@mint-up/features/shared/i18n/messages/es";
 
 import { routing } from "./routing";
 

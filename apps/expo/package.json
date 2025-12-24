@@ -1,5 +1,5 @@
 {
-  "name": "@myapp/expo",
+  "name": "@mint-up/expo",
   "version": "1.0.0",
   "scripts": {
     "clean": "git clean -xdf .cache .expo .turbo android ios node_modules",
@@ -36,10 +36,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@myapp/eslint-config": "workspace:*",
-    "@myapp/prettier-config": "workspace:*",
-    "@myapp/tailwind-config": "workspace:*",
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/prettier-config": "workspace:*",
+    "@mint-up/tailwind-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "@tailwindcss/postcss": "catalog:",
     "@types/react": "catalog:react19",
     "eslint": "catalog:",
@@ -52,5 +52,5 @@
   },
   "main": "index.ts",
   "private": true,
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

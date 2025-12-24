@@ -1,5 +1,5 @@
 {
-  "name": "@myapp/ui",
+  "name": "@mint-up/ui",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -42,9 +42,9 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@myapp/eslint-config": "workspace:*",
-    "@myapp/tailwind-config": "workspace:*",
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/tailwind-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
@@ -68,5 +68,5 @@
     "react": "catalog:react19",
     "zod": "catalog:"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

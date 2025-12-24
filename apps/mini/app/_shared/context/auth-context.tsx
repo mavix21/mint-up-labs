@@ -9,7 +9,7 @@ import { SiweMessage } from "siwe";
 import { base } from "viem/chains";
 import { useAccount, useSignMessage } from "wagmi";
 
-import type { Session } from "@myapp/auth";
+import type { Session } from "@mint-up/auth";
 
 import { authClient } from "@/auth/client";
 

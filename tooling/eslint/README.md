@@ -1,3 +1,3 @@
-# `@myapp/eslint-config`
+# `@mint-up/eslint-config`
 
 Shared eslint configuration for the workspace.

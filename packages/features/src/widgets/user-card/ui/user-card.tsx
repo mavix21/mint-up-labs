@@ -48,7 +48,7 @@ export interface UserCardProps {
  *
  * @example
  * ```tsx
- * import { UserCard } from "@myapp/features/widgets/user-card";
+ * import { UserCard } from "@mint-up/features/widgets/user-card";
  * import { useAccount, useBalance } from "wagmi";
  * import { formatEther } from "viem";
  *

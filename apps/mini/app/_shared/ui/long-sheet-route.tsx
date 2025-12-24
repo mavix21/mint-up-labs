@@ -4,7 +4,7 @@ import type { Route } from "next";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 
-import { LongSheet } from "@myapp/ui/components/long-sheet/index";
+import { LongSheet } from "@mint-up/ui/components/long-sheet/index";
 
 import { useSheetRoute } from "@/shared/hooks/use-sheet-route";
 

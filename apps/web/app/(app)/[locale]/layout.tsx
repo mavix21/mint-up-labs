@@ -1,13 +1,13 @@
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "@coinbase/onchainkit/styles.css";
-import "@myapp/ui/globals.css";
+import "@mint-up/ui/globals.css";
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 
-import { Toaster } from "@myapp/ui/components/sonner";
+import { Toaster } from "@mint-up/ui/components/sonner";
 
 import { routing } from "@/shared/i18n/routing";
 import { ThemeProvider } from "@/shared/ui/theme-provider";

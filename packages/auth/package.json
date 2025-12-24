@@ -1,5 +1,5 @@
 {
-  "name": "@myapp/auth",
+  "name": "@mint-up/auth",
   "private": true,
   "type": "module",
   "exports": {
@@ -17,8 +17,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@myapp/better-auth-siwe-wallet-agnostic": "workspace:*",
-    "@myapp/db": "workspace:*",
+    "@mint-up/better-auth-siwe-wallet-agnostic": "workspace:*",
+    "@mint-up/db": "workspace:*",
     "@t3-oss/env-core": "^0.13.10",
     "better-auth": "catalog:",
     "better-auth-siwf": "^1.0.26",
@@ -27,12 +27,12 @@
   },
   "devDependencies": {
     "@better-auth/cli": "catalog:",
-    "@myapp/eslint-config": "workspace:*",
-    "@myapp/prettier-config": "workspace:*",
-    "@myapp/tsconfig": "workspace:*",
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/prettier-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

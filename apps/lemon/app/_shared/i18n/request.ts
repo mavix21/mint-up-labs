@@ -1,6 +1,6 @@
 import { getRequestConfig } from "next-intl/server";
 
-import commonEs from "@myapp/features/shared/i18n/messages/es";
+import commonEs from "@mint-up/features/shared/i18n/messages/es";
 
 import appEs from "./messages/es.json";
 

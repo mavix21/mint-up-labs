@@ -9,7 +9,7 @@ import { siwe } from "better-auth/plugins";
 import { createPublicClient, getAddress, http } from "viem";
 import { mainnet } from "viem/chains";
 
-import siweWalletAgnostic from "@myapp/better-auth-siwe-wallet-agnostic";
+import siweWalletAgnostic from "@mint-up/better-auth-siwe-wallet-agnostic";
 
 export interface NeynarUser {
   fid: number;

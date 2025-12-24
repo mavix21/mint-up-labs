@@ -1,13 +1,13 @@
 {
-  "name": "myapp",
+  "name": "mint-up",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
-    "db:push": "turbo -F @myapp/db push",
-    "db:studio": "turbo -F @myapp/db studio",
+    "db:push": "turbo -F @mint-up/db push",
+    "db:studio": "turbo -F @mint-up/db studio",
     "dev": "turbo watch dev --continue",
     "dev:web": "turbo watch dev -F web...",
     "dev:mini": "turbo watch dev -F mini...",
@@ -19,7 +19,7 @@
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
-    "dev:expo": "turbo watch dev -F @myapp/expo...",
+    "dev:expo": "turbo watch dev -F @mint-up/expo...",
     "test:web": "turbo run test --continue --filter=web...",
     "test:mini": "turbo run test --continue --filter=mini...",
     "ui-add": "turbo run ui-add",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
-    "@myapp/prettier-config": "workspace:*",
+    "@mint-up/prettier-config": "workspace:*",
     "@turbo/gen": "^2.7.2",
     "@types/node": "catalog:",
     "dotenv-cli": "catalog:",
@@ -45,5 +45,5 @@
   "engines": {
     "node": "^22.21.0"
   },
-  "prettier": "@myapp/prettier-config"
+  "prettier": "@mint-up/prettier-config"
 }

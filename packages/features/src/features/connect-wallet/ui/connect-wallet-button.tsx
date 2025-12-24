@@ -43,7 +43,7 @@ export interface ConnectWalletButtonProps {
  *
  * @example
  * ```tsx
- * import { ConnectWalletButton } from "@myapp/features/features/connect-wallet";
+ * import { ConnectWalletButton } from "@mint-up/features/features/connect-wallet";
  * import { useAccount, useConnect, useDisconnect } from "wagmi";
  *
  * function MyConnectButton() {

@@ -1,4 +1,4 @@
-import { Skeleton } from "@myapp/ui/components/skeleton";
+import { Skeleton } from "@mint-up/ui/components/skeleton";
 
 export default function ProtectedPageLoading() {
   return (
