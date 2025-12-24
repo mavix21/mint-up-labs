@@ -1,0 +1,50 @@
+{
+  "name": "@myapp/features",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./app/providers": "./src/app/providers/index.ts",
+    "./entities/*": "./src/entities/*/index.ts",
+    "./features/*": "./src/features/*/index.ts",
+    "./widgets/*": "./src/widgets/*/index.ts",
+    "./shared/lib": "./src/shared/lib/index.ts",
+    "./shared/api": "./src/shared/api/index.ts",
+    "./shared/config": "./src/shared/config/index.ts",
+    "./shared/i18n": "./src/shared/i18n/index.ts",
+    "./shared/i18n/messages/en": "./src/shared/i18n/messages/en.json",
+    "./shared/i18n/messages/es": "./src/shared/i18n/messages/es.json"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc --watch",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "next-themes": "catalog:",
+    "tailwindcss": "catalog:"
+  },
+  "devDependencies": {
+    "@myapp/eslint-config": "workspace:*",
+    "@myapp/prettier-config": "workspace:*",
+    "@myapp/tailwind-config": "workspace:*",
+    "@myapp/tsconfig": "workspace:*",
+    "@types/react": "catalog:react19",
+    "@types/react-dom": "catalog:react19",
+    "eslint": "catalog:",
+    "next": "16.1.0",
+    "next-intl": "^4.6.1",
+    "prettier": "catalog:",
+    "react": "catalog:react19",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:react19"
+  },
+  "prettier": "@myapp/prettier-config"
+}

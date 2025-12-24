@@ -1,0 +1,39 @@
+{
+  "languages": {
+    "en": "English",
+    "es": "Spanish",
+    "pt": "Portuguese"
+  },
+  "common": {
+    "logo": "Logo",
+    "open_menu": "Open Menu",
+    "close_menu": "Close Menu",
+    "loading": "Loading...",
+    "not_available": "N/A"
+  },
+  "i18nTest": {
+    "title": "i18n Test Page",
+    "description": "This page tests internationalization across all apps",
+    "sections": {
+      "common": "Common Translations (from shared)",
+      "pageSpecific": "Page-Specific Translations",
+      "examples": "Example Phrases"
+    },
+    "labels": {
+      "greeting": "Greeting",
+      "farewell": "Farewell",
+      "welcome": "Welcome message"
+    },
+    "values": {
+      "greeting": "Hello!",
+      "farewell": "Goodbye!",
+      "welcome": "Welcome to our application"
+    },
+    "examples": {
+      "one": "The quick brown fox jumps over the lazy dog",
+      "two": "All that glitters is not gold",
+      "three": "Actions speak louder than words"
+    },
+    "footer": "✅ If you see this text in your language, i18n is working!"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "languages": {
+    "en": "Inglés",
+    "es": "Español",
+    "pt": "Portugués"
+  },
+  "common": {
+    "logo": "Logo",
+    "open_menu": "Abrir menú",
+    "close_menu": "Cerrar menú",
+    "loading": "Cargando...",
+    "not_available": "N/D"
+  },
+  "i18nTest": {
+    "title": "Página de Prueba i18n",
+    "description": "Esta página prueba la internacionalización en todas las apps",
+    "sections": {
+      "common": "Traducciones Comunes (del paquete compartido)",
+      "pageSpecific": "Traducciones Específicas de la Página",
+      "examples": "Frases de Ejemplo"
+    },
+    "labels": {
+      "greeting": "Saludo",
+      "farewell": "Despedida",
+      "welcome": "Mensaje de bienvenida"
+    },
+    "values": {
+      "greeting": "¡Hola!",
+      "farewell": "¡Adiós!",
+      "welcome": "Bienvenido a nuestra aplicación"
+    },
+    "examples": {
+      "one": "El veloz murciélago hindú comía feliz cardillo y kiwi",
+      "two": "No todo lo que brilla es oro",
+      "three": "Las acciones hablan más fuerte que las palabras"
+    },
+    "footer": "✅ ¡Si ves este texto en tu idioma, i18n está funcionando!"
+  }
+}
