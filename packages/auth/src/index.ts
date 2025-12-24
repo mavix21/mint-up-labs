@@ -109,7 +109,7 @@ export const betterAuthOptions = <
               {
                 method: "GET",
                 headers: {
-                  "x-api-key": process.env.NEYNAR_API_KEY,
+                  "x-api-key": process.env.NEYNAR_API_KEY!,
                   "Content-Type": "application/json",
                 },
               },
