@@ -30,7 +30,9 @@ export const createAuthOptions = (
     database: authComponent.adapter(ctx),
     secret: process.env.BETTER_AUTH_SECRET,
     optionsOnly: opts?.optionsOnly ?? false,
-    extraPlugins: [convex({ authConfig })],
+    extraPlugins: [
+      convex({ authConfig, jwksRotateOnTokenGenerationError: true }),
+    ],
   }) satisfies BetterAuthOptions;
 };
 
