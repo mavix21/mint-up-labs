@@ -114,7 +114,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       await (miniAppContext ? signInWithFarcaster() : signInWithSiwe());
-      refetchSession();
+      await refetchSession();
     } catch (err) {
       const error =
         err instanceof SignInCore.RejectedByUser
