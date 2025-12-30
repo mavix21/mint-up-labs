@@ -18,7 +18,7 @@
     "@base-org/account": "latest",
     "@base-org/account-ui": "latest",
     "@coinbase/onchainkit": "latest",
-    "@convex-dev/better-auth": "^0.10.6",
+    "@convex-dev/better-auth": "^0.10.9",
     "@mint-up/better-auth-siwe-wallet-agnostic": "workspace:*",
     "@mint-up/convex": "workspace:*",
     "@mint-up/db": "workspace:*",
