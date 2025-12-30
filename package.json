@@ -31,6 +31,7 @@
     "ios": "expo run:ios"
   },
   "devDependencies": {
+    "@effect/language-service": "^0.63.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@mint-up/prettier-config": "workspace:*",
     "@turbo/gen": "^2.7.2",
