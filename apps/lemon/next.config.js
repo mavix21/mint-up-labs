@@ -11,6 +11,7 @@ const nextConfig = {
   transpilePackages: ["@mint-up/ui", "@mint-up/features"],
 
   typedRoutes: true,
+  cacheComponents: true,
   typescript: { ignoreBuildErrors: true },
 
   // Server-side packages that should not be bundled
