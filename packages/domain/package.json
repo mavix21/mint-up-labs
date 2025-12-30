@@ -1,0 +1,29 @@
+{
+  "name": "@mint-up/domain",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "devDependencies": {
+    "@mint-up/eslint-config": "workspace:*",
+    "@mint-up/prettier-config": "workspace:*",
+    "@mint-up/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "prettier": "@mint-up/prettier-config",
+  "dependencies": {
+    "effect": "^3.19.13"
+  }
+}
