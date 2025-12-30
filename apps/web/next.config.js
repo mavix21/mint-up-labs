@@ -9,7 +9,7 @@ await jiti.import("./src/env");
 /** @type {import("next").NextConfig} */
 const config = {
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: ["@mint-up/db", "@mint-up/ui", "@mint-up/features"],
+  transpilePackages: ["@mint-up/ui", "@mint-up/features"],
 
   typedRoutes: true,
   typescript: { ignoreBuildErrors: true },
