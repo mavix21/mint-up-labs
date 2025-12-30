@@ -1,10 +1,11 @@
+import type { AuthFunctions } from "@convex-dev/better-auth";
 import { createClient, GenericCtx } from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
 import { betterAuth, BetterAuthOptions } from "better-auth";
 
 import { betterAuthOptions } from "@mint-up/auth";
 
-import { components } from "./_generated/api";
+import { components, internal } from "./_generated/api";
 import { DataModel } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 import authConfig from "./auth.config";
@@ -12,14 +13,30 @@ import authSchema from "./betterAuth/generatedSchema";
 
 const siteUrl = process.env.SITE_URL ?? "http://localhost:3000";
 
+const authFunctions: AuthFunctions = internal.auth;
+
 export const authComponent = createClient<DataModel, typeof authSchema>(
   components.betterAuth as any,
   {
+    authFunctions,
     local: {
       schema: authSchema,
     },
+    triggers: {
+      user: {
+        onCreate: async (ctx, authUser) => {
+          // Create app user linked to auth user
+          await ctx.db.insert("users", {
+            authId: authUser._id,
+          });
+        },
+      },
+    },
   },
 );
+
+// Export trigger handlers - required for triggers to work
+export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();
 
 export const createAuthOptions = (
   ctx: GenericCtx<DataModel>,

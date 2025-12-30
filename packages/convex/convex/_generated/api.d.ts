@@ -11,6 +11,12 @@
 import type * as auth from "../auth.js";
 import type * as http from "../http.js";
 import type * as lib_neynar from "../lib/neynar.js";
+import type * as tables_communities from "../tables/communities.js";
+import type * as tables_communityStewards from "../tables/communityStewards.js";
+import type * as tables_events from "../tables/events.js";
+import type * as tables_registrations from "../tables/registrations.js";
+import type * as tables_ticketTemplates from "../tables/ticketTemplates.js";
+import type * as tables_users from "../tables/users.js";
 import type * as users from "../users.js";
 
 import type {
@@ -23,6 +29,12 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   http: typeof http;
   "lib/neynar": typeof lib_neynar;
+  "tables/communities": typeof tables_communities;
+  "tables/communityStewards": typeof tables_communityStewards;
+  "tables/events": typeof tables_events;
+  "tables/registrations": typeof tables_registrations;
+  "tables/ticketTemplates": typeof tables_ticketTemplates;
+  "tables/users": typeof tables_users;
   users: typeof users;
 }>;
 
