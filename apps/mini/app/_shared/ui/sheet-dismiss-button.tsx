@@ -1,3 +1,5 @@
+"use client";
+
 import { X } from "lucide-react";
 
 import { Button } from "@mint-up/ui/components/button";

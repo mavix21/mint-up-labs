@@ -7,15 +7,22 @@ export const registrationsTable = defineTable({
   ticketTemplateId: v.id("ticketTemplates"),
   status: v.union(
     v.object({ type: v.literal("pending") }),
-    v.object({ type: v.literal("approved"), approvedAt: v.number() }),
-    v.object({ type: v.literal("rejected") }),
-    v.object({ type: v.literal("attended") }),
     v.object({
-      type: v.literal("minted"),
-      walletAddress: v.string(),
-      transactionHash: v.string(),
-      tokenId: v.string(),
-      mintedAt: v.number(),
+      type: v.literal("approved"),
+      approvedAt: v.number(),
+      nftTicket: v.optional(
+        v.object({
+          walletAddress: v.string(),
+          transactionHash: v.string(),
+          tokenId: v.string(),
+        }),
+      ),
+    }),
+    v.object({ type: v.literal("rejected") }),
+    v.object({ type: v.literal("waitlisted") }),
+    v.object({
+      type: v.literal("checkedIn"),
+      checkedInAt: v.number(),
     }),
   ),
   eventIntentions: v.optional(
@@ -29,23 +36,18 @@ export const registrationsTable = defineTable({
       ),
     ),
   ),
-  checkIn: v.optional(
-    v.object({
-      checkedInAt: v.number(),
-      poapStatus: v.optional(
-        v.union(
-          v.object({
-            type: v.literal("claimed"),
-            transactionHash: v.string(),
-            tokenId: v.string(),
-            claimedAt: v.number(),
-          }),
-          v.object({
-            type: v.literal("unclaimed"),
-          }),
-        ),
-      ),
-    }),
+  poapStatus: v.optional(
+    v.union(
+      v.object({
+        type: v.literal("claimed"),
+        transactionHash: v.string(),
+        tokenId: v.string(),
+        claimedAt: v.number(),
+      }),
+      v.object({
+        type: v.literal("unclaimed"),
+      }),
+    ),
   ),
 })
   .index("by_event", ["eventId"])
