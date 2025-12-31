@@ -3,6 +3,8 @@ import { Inter, Sora } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { preconnect } from "react-dom";
 
+import { ThemeProvider } from "@mint-up/features/app/providers";
+
 import { ConvexClientProvider } from "@/app/_providers/convex-cllient.provider";
 import { minikitConfig } from "@/minikit.config";
 import { AuthProvider } from "@/shared/context/auth-context";
@@ -10,7 +12,6 @@ import { MiniAppProvider } from "@/shared/context/miniapp-context";
 import { BottomNav } from "@/widgets/navigation";
 
 import { OnchainKitClientProvider } from "./_providers/onchainkit.provider";
-import { ThemeProvider } from "./_providers/theme-provider";
 
 import "@coinbase/onchainkit/styles.css";
 import "@mint-up/ui/globals.css";
