@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@mint-up/better-auth-siwe-wallet-agnostic": "workspace:*",
-    "@mint-up/db": "workspace:*",
     "@t3-oss/env-core": "^0.13.10",
     "better-auth": "catalog:",
     "better-auth-siwf": "^1.0.26",
