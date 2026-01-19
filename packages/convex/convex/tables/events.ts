@@ -10,20 +10,25 @@ export const eventsTable = defineTable({
   creatorId: v.id("users"),
   organizationId: v.optional(v.id("organizations")),
   theme: v.optional(v.string()),
-  // category: v.union(
-  //   v.literal("music & performing arts"),
-  //   v.literal("business & professional"),
-  //   v.literal("arts & culture"),
-  //   v.literal("tech"),
-  //   v.literal("gaming"),
-  //   v.literal("food & drink"),
-  //   v.literal("health & wellness"),
-  //   v.literal("sports & fitness"),
-  //   v.literal("education & learning"),
-  //   v.literal("community & causes"),
-  //   v.literal("parties & socials"),
-  //   v.literal("hobbies & interests"),
-  // ),
+  isFeatured: v.boolean(),
+  category: v.union(
+    v.literal("music & performing arts"),
+    v.literal("business & professional"),
+    v.literal("food & drink"),
+    v.literal("arts & culture"),
+    v.literal("film & media"),
+    v.literal("fashion & beauty"),
+    v.literal("travel & outdoor"),
+    v.literal("sports & fitness"),
+    v.literal("health & wellness"),
+    v.literal("tech"),
+    v.literal("gaming"),
+    v.literal("education & learning"),
+    v.literal("community & causes"),
+    v.literal("parties & socials"),
+    v.literal("hobbies & interests"),
+    v.literal("other"),
+  ),
   location: v.union(
     v.object({
       type: v.literal("online"),
@@ -36,10 +41,9 @@ export const eventsTable = defineTable({
     }),
   ),
   visibility: v.union(v.literal("public"), v.literal("unlisted")),
-  hosts: v.array(
+  coHosts: v.array(
     v.object({
       userId: v.id("users"),
-      role: v.union(v.string()),
     }),
   ),
 
@@ -69,19 +73,6 @@ export const eventsTable = defineTable({
         eventId: v.string(), // onchain event id
         contractAddress: v.string(),
         chainId: v.number(),
-      }),
-    ),
-  ),
-
-  automatedFlows: v.optional(
-    v.array(
-      v.object({
-        type: v.union(
-          v.literal("pre_event_reminder"),
-          v.literal("event_start_announcement"),
-          v.literal("post_event_poap_announcement"),
-        ),
-        isEnabled: v.boolean(),
       }),
     ),
   ),
