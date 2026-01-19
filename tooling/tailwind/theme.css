@@ -1,4 +1,16 @@
 :root {
+  --green-priestess-50: oklch(0.985 0.023 148.72);
+  --green-priestess-100: oklch(0.968 0.056 148.72);
+  --green-priestess-200: oklch(0.937 0.104 148.72);
+  --green-priestess-300: oklch(0.894 0.176 148.72);
+  --green-priestess-400: oklch(0.834 0.237 148.72);
+  --green-priestess-500: oklch(0.76 0.242 148.72);
+  --green-priestess-600: oklch(0.657 0.212 148.72);
+  --green-priestess-700: oklch(0.554 0.17 148.72);
+  --green-priestess-800: oklch(0.471 0.133 148.72);
+  --green-priestess-900: oklch(0.413 0.106 148.72);
+  --green-priestess-950: oklch(0.282 0.072 148.72);
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -6,8 +18,8 @@
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.488 0.243 264.376);
-  --primary-foreground: oklch(0.97 0.014 254.604);
+  --primary: var(--green-priestess-500);
+  --primary-foreground: var(--green-priestess-50);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.967 0.001 286.375);
@@ -39,8 +51,8 @@
     --card-foreground: oklch(0.985 0 0);
     --popover: oklch(0.21 0.006 285.885);
     --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.488 0.243 264.376);
-    --primary-foreground: oklch(0.97 0.014 254.604);
+    --primary: var(--green-priestess-400);
+    --primary-foreground: var(--green-priestess-950);
     --secondary: oklch(0.274 0.006 286.033);
     --secondary-foreground: oklch(0.985 0 0);
     --muted: oklch(0.274 0.006 286.033);
