@@ -116,10 +116,7 @@ export const searchEvents = query({
   },
   handler: async (ctx, { searchTerm, category }) => {
     const currentAuthUser = await authComponent.getAuthUser(ctx);
-    const currentUser = await ctx.db
-      .query("users")
-      .withIndex("by_authId", (q) => q.eq("authId", currentAuthUser?._id || ""))
-      .first();
+    const userId = (currentAuthUser?.userId || null) as Id<"users"> | null;
 
     const now = Date.now();
     let events: Doc<"events">[];
@@ -160,6 +157,6 @@ export const searchEvents = query({
         .collect();
     }
 
-    return enrichEventsWithCommonData(ctx, events, currentUser?._id || null);
+    return enrichEventsWithCommonData(ctx, events, userId);
   },
 });

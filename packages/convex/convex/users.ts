@@ -70,7 +70,7 @@ export const getOrCreateUserFromFid = action({
       authId: newUser.id,
     });
 
-    await ctx.runMutation(components.betterAuth.auth.setUserId, {
+    await ctx.runMutation(components.betterAuth.authUser.setUserId, {
       authId: newUser.id,
       userId: newAppUserId,
     });

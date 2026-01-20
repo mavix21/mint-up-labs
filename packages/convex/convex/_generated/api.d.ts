@@ -1539,7 +1539,7 @@ export declare const components: {
         any
       >;
     };
-    auth: {
+    authUser: {
       setUserId: FunctionReference<
         "mutation",
         "internal",

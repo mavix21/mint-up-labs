@@ -29,7 +29,10 @@ export const authComponent = createClient<DataModel, typeof authSchema>(
           const userId = await ctx.db.insert("users", {
             authId: authUser._id,
           });
-          await ctx.runMutation(components.betterAuth.auth.setUserId, {
+          // Use authComponent.setUserId helper instead of calling the mutation directly
+          // to avoid module evaluation issues that trigger auth config validation
+          // await authComponent.setUserId(ctx, authUser._id, userId);
+          await ctx.runMutation(components.betterAuth.authUser.setUserId, {
             authId: authUser._id,
             userId: userId,
           });
