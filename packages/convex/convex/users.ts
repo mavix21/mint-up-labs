@@ -1,7 +1,7 @@
 import { v } from "convex/values";
 
-import { components } from "./_generated/api";
-import { action } from "./_generated/server";
+import { components, internal } from "./_generated/api";
+import { action, internalMutation } from "./_generated/server";
 import { fetchUserByFid } from "./lib/neynar";
 
 /**
@@ -65,6 +65,15 @@ export const getOrCreateUserFromFid = action({
         },
       },
     );
+
+    const newAppUserId = await ctx.runMutation(internal.users.createAppUser, {
+      authId: newUser.id,
+    });
+
+    await ctx.runMutation(components.betterAuth.auth.setUserId, {
+      authId: newUser.id,
+      userId: newAppUserId,
+    });
 
     // Also create a record in the farcaster table for additional data
     await ctx.runMutation(components.betterAuth.adapter.create, {
@@ -137,6 +146,17 @@ export const removeNotificationDetails = action({
           updatedAt: Date.now(),
         },
       },
+    });
+  },
+});
+
+export const createAppUser = internalMutation({
+  args: {
+    authId: v.string(),
+  },
+  handler: async (ctx, { authId }) => {
+    return await ctx.db.insert("users", {
+      authId,
     });
   },
 });

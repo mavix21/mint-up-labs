@@ -26,8 +26,12 @@ export const authComponent = createClient<DataModel, typeof authSchema>(
       user: {
         onCreate: async (ctx, authUser) => {
           // Create app user linked to auth user
-          await ctx.db.insert("users", {
+          const userId = await ctx.db.insert("users", {
             authId: authUser._id,
+          });
+          await ctx.runMutation(components.betterAuth.auth.setUserId, {
+            authId: authUser._id,
+            userId: userId,
           });
         },
       },

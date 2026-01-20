@@ -85,6 +85,14 @@ export const betterAuthOptions = <
   options: InitAuthOptions<TExtraPlugins, TDatabase>,
 ) =>
   ({
+    user: {
+      additionalFields: {
+        userId: {
+          type: "string",
+          required: false,
+        },
+      },
+    },
     baseURL: options.baseUrl,
     database: options.database,
     secret: options.secret,

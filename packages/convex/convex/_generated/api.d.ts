@@ -1539,5 +1539,13 @@ export declare const components: {
         any
       >;
     };
+    auth: {
+      setUserId: FunctionReference<
+        "mutation",
+        "internal",
+        { authId: string; userId: string },
+        any
+      >;
+    };
   };
 };
