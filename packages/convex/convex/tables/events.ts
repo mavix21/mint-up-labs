@@ -82,5 +82,5 @@ export const eventsTable = defineTable({
   .index("by_startDate", ["startDate"])
   .searchIndex("search_events", {
     searchField: "name",
-    // filterFields: ["category"],
+    filterFields: ["category"],
   });
