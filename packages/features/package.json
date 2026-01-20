@@ -6,6 +6,7 @@
   "sideEffects": false,
   "exports": {
     "./app/providers": "./src/app/providers/index.ts",
+    "./pages/*": "./src/pages/*/index.ts",
     "./entities/*": "./src/entities/*/index.ts",
     "./features/*": "./src/features/*/index.ts",
     "./widgets/*": "./src/widgets/*/index.ts",
